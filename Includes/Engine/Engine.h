@@ -2,6 +2,7 @@
 
 #include "Core.h"
 #include "Math/Vector2.h"
+#include "Engine/Engine_Struct.h"
 
 // 입력 처리를 위한 구조체.
 struct KeyState

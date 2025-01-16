@@ -6,7 +6,6 @@
 
 #include "Level/Level.h"
 #include "Actor/Actor.h"
-
 #include <time.h>
 
 // 스태틱 변수 초기화.
@@ -34,12 +33,6 @@ Engine::Engine()
 	// 2. 값 할당.
 	for (int y = 0; y < screenSize.y; ++y)
 	{
-		//for (int x = 0; x < screenSize.x; ++x)
-		//{
-		//	// 인덱스 계산 잘하기.
-		//	emptyStringBuffer[(y * (screenSize.x + 1)) + x] = ' ';
-		//}
-
 		// 각 줄 끝에 개행 문자 추가.
 		emptyStringBuffer[(y * (screenSize.x + 1)) + screenSize.x] = '\n';
 	}
@@ -279,13 +272,14 @@ void Engine::Clear()
 	// 화면의 (0,0)으로 이동.
 	SetCursorPosition(0, 0);
 
-	// 화면 지우기.
+	//화면 지우기.
 	std::cout << emptyStringBuffer;
 
 	//int height = 25;
 	//for (int ix = 0; ix < height; ++ix)
 	//{
 	//	std::cout << "                               \n";
+	//	SetCursorPosition(0, ix+1);
 	//}
 
 	// 화면의 (0,0)으로 이동.
@@ -295,7 +289,7 @@ void Engine::Clear()
 void Engine::Draw()
 {
 	// 화면 지우기.
-	Clear();
+	//Clear();
 
 	// 레벨 그리기.
 	if (mainLevel != nullptr)

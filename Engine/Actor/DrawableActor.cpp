@@ -23,12 +23,18 @@ void DrawableActor::Draw()
 {
 	Super::Draw();
 
+	// 색상 설정.
+	SetColor(color);
+
 	// 그리기.
 	// 1단계: 콘솔 좌표 옮기기.
 	Engine::Get().SetCursorPosition(position);
 
 	// 2단계: 그리기 (콘솔 출력).
 	Log(image);
+
+	// 색상 복구.
+	SetColor(Color::White);
 }
 
 void DrawableActor::SetPosition(const Vector2& newPosition)
@@ -41,20 +47,42 @@ void DrawableActor::SetPosition(const Vector2& newPosition)
 	Super::SetPosition(newPosition);
 }
 
+void DrawableActor::Change_Image(const char* _image)
+{
+	if(image != nullptr) delete[] this->image;
+	// 전달 받은 문자열 복사.
+	auto length = strlen(_image) + 1;
+	this->image = new char[length];
+	strcpy_s(this->image, length, _image);
+
+	// 너비 설정.
+	width = (int)strlen(image);
+}
+
 bool DrawableActor::Intersect(const DrawableActor& other)
 {
-	int min = position.x; // Left
-	int max = position.x + width; // Right
+	// AABB(Axis Aligned Bounding Box).
 
+	// 내 x좌표 최소/최대.
+	int min = position.x;
+	int max = position.x + width;
+
+	// 다른 액터의 x좌표 최소/최대.
 	int otherMin = other.position.x;
 	int otherMax = other.position.x + other.width;
 
-	// 다른 액터의 왼쪽 끝 위치가 내 오른쪽 위치를 벗어나는 경우, 반대의 경우 충돌하지 않은 것
-	if (otherMin > max || otherMax < min)
+	// 다른 액터의 왼쪽 끝 위치가 내 오른쪽 끝 위치를 벗어나면 충돌 안함.
+	if (otherMin > max)
 	{
 		return false;
 	}
-	
-	// X가 겹치는 경우 y위치를 비교한다.
+
+	// 다른 액터의 오른쪽 끝 위치가 내 왼쪽 끝 위치보다 작으면 충돌 안함.
+	if (otherMax < min)
+	{
+		return false;
+	}
+
+	// 위의 두 경우가 아니라면 (x좌표는 서로 겹침), y위치 비교.
 	return position.y == other.position.y;
 }

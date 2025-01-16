@@ -200,6 +200,8 @@ xcopy $(OutDir)\Engine.dll $(SolutionDir)Bin\$(Platform)\$(Configuration)\Client
     <ClInclude Include="Container\List.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Engine\Engine.h" />
+    <ClInclude Include="Engine\Engine_Struct.h" />
+    <ClInclude Include="Engine\Timer.h" />
     <ClInclude Include="Level\Level.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="PreCompiledHeader\PreCompiledHeader.h" />
