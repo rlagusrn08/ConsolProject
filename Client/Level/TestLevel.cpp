@@ -9,7 +9,8 @@
 TestLevel::TestLevel()
 {
 	ENGINE.SetCursorType(CursorType::NoCursor);
-	AddActor(new Player(Vector2(5, 5)));
+	m_pPlayer = new Player(Vector2(5, 5));
+	AddActor(m_pPlayer);
 	actors.PushBack(new Ghost(Vector2(1, 1)));
 	m_pTile_Manager = new Tile_Manager();
 }

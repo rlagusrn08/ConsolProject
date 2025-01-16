@@ -1,4 +1,5 @@
 #include "Ghost.h"
+#include "Tile/Tile_Manager.h"
 
 Ghost::Ghost(const Vector2& _position)
 	: DrawableActor("¡Ü")

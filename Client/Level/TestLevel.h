@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Level/Level.h"
+#include "Actor/Player.h"
 
 class Tile_Manager;
 class TestLevel : public Level
@@ -17,4 +18,5 @@ public:
 
 private:
 	Tile_Manager* m_pTile_Manager = nullptr;
+	Player* m_pPlayer = nullptr;
 };

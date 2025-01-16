@@ -63,6 +63,12 @@ void Player::Get_KeyDown()
 			Change_Image("∩");
 		}
 	}
+
+	// TODO : Delete
+	if (ENGINE.GetKeyDown(VK_SPACE))
+	{
+		TM.Start_Astar(Vector2(1, 1), Position());
+	}
 }
 
 void Player::Move(float deltaTime)
