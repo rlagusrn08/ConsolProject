@@ -18,6 +18,8 @@ void Ghost::Update(float deltaTime)
 
 void Ghost::Make_Route()
 {
+	if (DM.Get_Mode() != GAME_MODE) return;
+
 	if (DM.Get_Detect_Player_Move())
 	{
 		TM.Start_Astar(position, DM.Get_Player_Position(), m_BestRoute);
@@ -26,6 +28,8 @@ void Ghost::Make_Route()
 
 void Ghost::Move(float deltaTime)
 {
+	if (DM.Get_Mode() != GAME_MODE) return;
+
 	if (!m_BestRoute.empty())
 	{
 		Vector2 VTemp = position - m_BestRoute.front()->Position();

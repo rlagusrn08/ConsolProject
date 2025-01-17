@@ -28,6 +28,13 @@ public:
 	//For. Astar
 	void Start_Astar(const Vector2& vStart, const Vector2& vGoal, list<Tile*>& OutputList);
 
+public:
+	//For. Tool
+	void Insert_Tile(const Vector2& vPosition);
+	bool Find_Tile(const Vector2& vPosition);
+	void Delete_Tile(const Vector2& vPosition);
+	void Save_Tile();
+	void Load_Tile(const char* path);
 private:
 	void Ready_Adj();
 	void Clear_Astar_List(list<Tile*>& OutputList);

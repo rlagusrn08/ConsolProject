@@ -10,7 +10,7 @@ Item::Item(const Vector2& _position)
 
 void Item::Update(float delatTime)
 {
-	if (position == DM.Get_Player_Position())
+	if (position == DM.Get_Player_Position() && DM.Get_Mode() == GAME_MODE)
 	{
 		DM.Increase_Score(1);
 		Destroy();

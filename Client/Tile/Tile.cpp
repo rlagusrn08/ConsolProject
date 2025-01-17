@@ -11,3 +11,10 @@ void Tile::Draw()
 		Engine::Get().Draw(position, "w", color);
 }
 
+const char* Tile::Serialize()
+{
+	char* buffer = new char[256];
+	snprintf(buffer, 256, "%d %d\n", Position().x, Position().y);
+	return buffer;
+}
+

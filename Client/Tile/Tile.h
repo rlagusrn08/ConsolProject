@@ -30,7 +30,9 @@ public:
 	virtual void Draw() override;
 	void Set_ShouldDraw() { m_bShouldDraw = true; };
 	void Set_DebugDraw() { m_bShouldDraw = true; m_bDebugDraw = true; }
+	void Set_Type(TILE_TYPE _eType) { m_tInfo.eOption = _eType; }
 	TILEINFO& Get_TileInfo() { return m_tInfo; }
+	const char* Serialize();
 
 private:
 	TILEINFO m_tInfo;

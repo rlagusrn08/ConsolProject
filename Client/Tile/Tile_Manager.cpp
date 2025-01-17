@@ -2,6 +2,7 @@
 #include "Tile_Manager.h"
 #include "Engine/Engine.h"
 #include <algorithm>
+#include "Manager/Data_Manager.h"
 
 // 스태틱 변수 초기화.
 Tile_Manager* Tile_Manager::instance = nullptr;
@@ -79,6 +80,121 @@ TILE_TYPE Tile_Manager::Get_Tile_Type(const Vector2& pos)
 int Tile_Manager::Get_Tile_Index(const Vector2& pos)
 {
 	return pos.y * m_iSizeX + pos.x;
+}
+
+void Tile_Manager::Insert_Tile(const Vector2& vPosition)
+{
+	if (DM.Get_Mode() != TOOL_MODE) return;
+	if (Find_Tile(vPosition)) return;
+
+	Tile* pTile = new Tile(Vector2(vPosition.x, vPosition.y));
+	pTile->Get_TileInfo().eOption = TILE_WALL;
+	m_vTile.push_back(pTile);
+}
+
+bool Tile_Manager::Find_Tile(const Vector2& vPosition)
+{
+	if (DM.Get_Mode() != TOOL_MODE) return false;
+
+	for (auto iter : m_vTile)
+	{
+		if(vPosition.x == iter->Position().x && vPosition.y == iter->Position().y)
+			return true;
+	}
+
+	return false;
+}
+
+void Tile_Manager::Delete_Tile(const Vector2& vPosition)
+{
+	for (auto iter = m_vTile.begin();
+		iter != m_vTile.end();
+		iter++)
+	{
+		if (vPosition.x == (*iter)->Position().x && vPosition.y == (*iter)->Position().y)
+		{
+			SafeDelete((*iter));
+			m_vTile.erase(iter);
+			break;
+		}
+	}
+}
+
+void Tile_Manager::Save_Tile()
+{
+	int maxX = 0, maxY = 0;
+	for (auto iter : m_vTile)
+	{
+		if (maxX < iter->Position().x) maxX = iter->Position().x;
+		if (maxY < iter->Position().y) maxY = iter->Position().y;
+	}
+
+	// 저장할 데이터 생성.
+	char buffer[1000001];
+	memset(buffer, 0, 1000001);
+
+
+	char* Point = new char[256];
+	snprintf(Point, 256, "%d %d\n", maxX, maxY);
+	strcat_s(buffer, Point);
+	delete[] Point;
+
+	for (auto iter : m_vTile)
+	{
+		// 각 계좌별로 문자열 데이터로 직렬화.
+		const char* data = iter->Serialize();
+		strcat_s(buffer, data);
+		delete data;
+	}
+
+	// 파일 저장.
+	FILE* file = nullptr;
+	fopen_s(&file, "../Data/Tile.txt", "wb");
+	if (file)
+	{
+		fwrite(buffer, strlen(buffer) + 1, 1, file);
+		fclose(file);
+	}
+}
+
+void Tile_Manager::Load_Tile(const char* path)
+{
+	// 파일 로드.
+	FILE* file = nullptr;
+	fopen_s(&file, path, "rb");
+
+	if (file)
+	{
+		Clear();
+		char buffer[256];
+		// 한 줄씩 읽기.
+		fgets(buffer, 256, file);
+
+		// 계좌 유형.
+		sscanf_s(buffer, "%d %d", &m_iSizeX + 1, &m_iSizeY + 1);
+
+		int index = 0;
+		for (int i = 0; i < m_iSizeY; i++)
+		{
+			for (int j = 0; j < m_iSizeX; j++)
+			{
+				Tile* pTile = new Tile(Vector2(j, i));
+				pTile->Get_TileInfo().iIndex = index++;
+				m_vTile.push_back(pTile);
+			}
+		}
+
+		while (!feof(file))
+		{
+			fgets(buffer, 256, file);
+			int iX = -1, iY = -1;
+			sscanf_s(buffer, "%d %d", &iX, &iY);
+
+			m_vTile[Get_Tile_Index(Vector2(iX, iY))]->Set_Type(TILE_TYPE::TILE_WALL);
+		}
+		// 파일 닫기.
+		fclose(file);
+	}
 }
 
 void Tile_Manager::Ready_Adj()
