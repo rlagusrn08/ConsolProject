@@ -17,11 +17,12 @@ public:
 	void Set_Player_Pointer(Player* _player) { CurrentPlayer = _player; }
 	void Set_Detect_Player_Move(bool _value) { bDetectPlayerMove = _value; }
 	bool Get_Detect_Player_Move() { return bDetectPlayerMove; }
-
+	void Increase_Score(int _score) { score += _score; }
 private:
 	static Data_Manager* instance;
 
 private:
 	Player* CurrentPlayer = nullptr;
 	bool bDetectPlayerMove = false;
+	int score = 0;
 };
