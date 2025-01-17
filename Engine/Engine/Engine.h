@@ -28,6 +28,7 @@ public:
 
 	// 레벨 추가 함수.
 	void LoadLevel(Level* newLevel);
+	void ChangeLevel(Level* newLevel);
 
 	// 액터 추가/삭제 함수.
 	void AddActor(Actor* newActor);
@@ -90,6 +91,9 @@ protected:
 
 	// 메인 레벨 변수.
 	Level* mainLevel;
+
+	// 메인 레벨 변수.
+	Level* nextLevel = nullptr;
 
 	// 프레임을 업데이트해야 하는지 여부를 나타내는 변수.
 	bool shouldUpdate = true;

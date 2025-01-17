@@ -45,6 +45,17 @@ void Level::ProcessAddedAndDestroyedActor()
 	}
 }
 
+void Level::Clear_Level()
+{
+	for (int ix = 0; ix < actors.Size();)
+	{
+		delete actors[ix];
+		actors[ix] = nullptr;
+		actors.Erase(ix);
+		continue;
+	}
+}
+
 void Level::Update(float deltaTime)
 {
 	// 레벨에 포함된 액터를 순회하면서 Update 함수 호출.

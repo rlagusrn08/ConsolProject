@@ -2,6 +2,9 @@
 
 #include "Level/MenuLevel.h"
 #include "Manager/Data_Manager.h"
+#include "Level/TestLevel.h"
+#include "Level/MainMenuLevel.h"
+#include "Level/ToolLevel.h"
 
 Game* Game::instance = nullptr;
 
@@ -45,4 +48,25 @@ void Game::ToggleMenu()
 	{
 		mainLevel = backLevel;
 	}
+}
+
+void Game::Load_MainMenu()
+{
+	DM.Set_Mode(MODE::MENU_MODE);
+	showMenu = false;
+	mainLevel = backLevel;
+	
+	ENGINE.ChangeLevel(new MainMenuLevel());
+}
+
+void Game::Load_ToolLevel()
+{
+	DM.Set_Mode(MODE::TOOL_MODE);
+	ENGINE.ChangeLevel(new ToolLevel());
+}
+
+void Game::Load_Level1()
+{
+	DM.Set_Mode(MODE::GAME_MODE);
+	ENGINE.ChangeLevel(new TestLevel());
 }

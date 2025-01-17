@@ -1,16 +1,16 @@
-#include "MenuLevel.h"
+#include "MainMenuLevel.h"
 #include "Game/Game.h"
 #include <Define.h>
 
-MenuLevel::MenuLevel()
+MainMenuLevel::MainMenuLevel()
 {
-	menuItems.PushBack(new MenuItem("Resume Game", []() { Game::Get().ToggleMenu(); }));
-	menuItems.PushBack(new MenuItem("Main Menu", []() { Game::Get().Load_MainMenu(); }));
+	menuItems.PushBack(new MenuItem("Start Game", []() { Game::Get().Load_Level1(); }));
+	menuItems.PushBack(new MenuItem("Tool Mode", []() { Game::Get().Load_ToolLevel(); }));
 	menuItems.PushBack(new MenuItem("Quit Game", []() { Game::Get().QuitGame(); }));
 	length = menuItems.Size();
 }
 
-MenuLevel::~MenuLevel()
+MainMenuLevel::~MainMenuLevel()
 {
 	for (auto* item : menuItems)
 	{
@@ -18,7 +18,7 @@ MenuLevel::~MenuLevel()
 	}
 }
 
-void MenuLevel::Update(float deltaTime)
+void MainMenuLevel::Update(float deltaTime)
 {
 	if (Game::Get().GetKeyDown(VK_ESCAPE))
 	{
@@ -40,7 +40,7 @@ void MenuLevel::Update(float deltaTime)
 	}
 }
 
-void MenuLevel::Draw()
+void MainMenuLevel::Draw()
 {
 	Super::Draw();
 

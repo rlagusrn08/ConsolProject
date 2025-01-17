@@ -50,8 +50,17 @@ void Tile_Manager::Draw()
 {
 	for (int i = 0; i < m_vTile.size();i++)
 	{
-		m_vTile[i]->Draw();
+		m_vTile[i]->Draw();	
 	}
+}
+
+void Tile_Manager::Clear()
+{
+	for (int i = 0; i < m_vTile.size();i++)
+	{
+		SafeDelete(m_vTile[i]);
+	}
+	m_vTile.clear();
 }
 
 void Tile_Manager::Set_ShouldDraw(const Vector2& pos)

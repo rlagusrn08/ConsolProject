@@ -20,12 +20,12 @@ TestLevel::TestLevel()
 	actors.PushBack(new Target(Vector2(5, 1)));
 	actors.PushBack(new Target(Vector2(7, 1)));
 
-	m_pTile_Manager = new Tile_Manager();
+	
 }
 
 TestLevel::~TestLevel()
 {
-	delete m_pTile_Manager;
+	TM.Clear();
 }
 
 void TestLevel::Update(float deltaTime)

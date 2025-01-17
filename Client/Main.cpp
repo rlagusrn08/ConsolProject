@@ -3,8 +3,9 @@
 #include "Engine/Engine.h"
 #include "Level/TestLevel.h"
 #include "Manager/Data_Manager.h"
+#include "Tile/Tile_Manager.h"
 #include "Game/Game.h"
-#include "Level/MenuLevel.h"
+#include "Level/MainMenuLevel.h"
 
 Engine* engine = nullptr;
 
@@ -14,8 +15,9 @@ int main()
 
 	//Set Manager
 	Data_Manager dm;
+	Tile_Manager tm;
 
 	Game game;
-	game.LoadLevel(new TestLevel());
+	game.LoadLevel(new MainMenuLevel());
 	game.Run();
  }

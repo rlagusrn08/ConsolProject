@@ -150,6 +150,14 @@ void Engine::Run()
 				mainLevel->ProcessAddedAndDestroyedActor();
 			}
 
+			if (nextLevel)
+			{
+				mainLevel->Clear_Level();
+				delete mainLevel;
+				mainLevel = nextLevel;
+				nextLevel = nullptr;
+			}
+
 			// 프레임 활성화.
 			shouldUpdate = true;
 		}
@@ -159,9 +167,14 @@ void Engine::Run()
 void Engine::LoadLevel(Level* newLevel)
 {
 	// 기존 레벨이 있다면 삭제 후 교체.
-
+	
 	// 메인 레벨 설정.
 	mainLevel = newLevel;
+}
+
+void Engine::ChangeLevel(Level* newLevel)
+{
+	nextLevel = newLevel;
 }
 
 void Engine::AddActor(Actor* newActor)

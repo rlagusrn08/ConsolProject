@@ -4,13 +4,13 @@
 #include "Container/List.h"
 #include "Struct.h"
 
-class MenuLevel : public Level
+class MainMenuLevel : public Level
 {
-	RTTI_DECLARATIONS(MenuLevel, Level)
+	RTTI_DECLARATIONS(MainMenuLevel, Level)
 
 public:
-	MenuLevel();
-	~MenuLevel();
+	MainMenuLevel();
+	~MainMenuLevel();
 
 	virtual void Update(float deltaTime) override;
 	virtual void Draw() override;

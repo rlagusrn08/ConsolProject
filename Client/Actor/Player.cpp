@@ -5,7 +5,7 @@
 #include "Game/Game.h"
 
 Player::Player(const Vector2& _position)
-	: DrawableActor("O")
+	: DrawableActor("C")
 {
 	this->position = _position;
 	color = Color::Yellow;
@@ -16,12 +16,13 @@ void Player::Update(float deltaTime)
 	Super::Update(deltaTime);
 
 	Get_KeyDown();
-	Move(deltaTime);
-
+	Game_Move(deltaTime);
+	Tool_Move(deltaTime);
 }
 
 void Player::Get_KeyDown()
 {
+	if (DM.Get_Mode() != MODE::GAME_MODE) return;
 	if (Engine::Get().GetKeyDown(VK_ESCAPE))
 	{
 		//Engine::Get().QuitGame();
@@ -72,9 +73,9 @@ void Player::Get_KeyDown()
 	} 
 }
 
-void Player::Move(float deltaTime)
+void Player::Game_Move(float deltaTime)
 {
-	if (m_eDir == MOVE_NONE) return;
+	if (m_eDir == MOVE_NONE || DM.Get_Mode() != MODE::GAME_MODE) return;
 
 	
 	m_fMovement += deltaTime * m_fCurrentSpeed;
@@ -111,4 +112,34 @@ void Player::Move(float deltaTime)
 		DM.Set_Detect_Player_Move(false);
 	}
 
+}
+
+void Player::Tool_Move(float deltaTime)
+{
+	if (DM.Get_Mode() != MODE::TOOL_MODE) return;
+
+	if (Engine::Get().GetKeyDown(VK_ESCAPE))
+	{
+		//Engine::Get().QuitGame();
+		// 메뉴 토글.
+		Game::Get().ToggleMenu();
+	}
+
+	if (ENGINE.GetKeyDown(VK_LEFT) && position.x > 0)
+	{
+		position = Vector2(Position().x - 1, Position().y);
+	}
+	else if (ENGINE.GetKeyDown(VK_RIGHT) && position.x < ENGINE.ScreenSize().x-1)
+	{
+		position = Vector2(Position().x + 1, Position().y);
+	}
+	else if (ENGINE.GetKeyDown(VK_UP) && position.y > 0)
+	{
+		position = Vector2(Position().x, Position().y - 1);
+	}
+	else if (ENGINE.GetKeyDown(VK_DOWN) && position.y < ENGINE.ScreenSize().y-2)
+	{
+		position = Vector2(Position().x, Position().y + 1);
+	}
+	SetPosition(position);
 }

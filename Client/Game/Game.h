@@ -9,6 +9,10 @@ public:
 	~Game();
 
 	void ToggleMenu();
+	void Load_MainMenu();
+	void Load_ToolLevel();
+	void Load_Level1();
+	
 
 	static Game& Get() { return *instance; }
 

@@ -21,6 +21,7 @@ public:
 	// 삭제 요청이 된 액터를 정리하는 함수.
 	//void DestroyActor();
 	void ProcessAddedAndDestroyedActor();
+	void Clear_Level();
 
 	// 루프 처리 함수.
 	virtual void Update(float deltaTime);
