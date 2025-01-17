@@ -156,20 +156,30 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Ghost.cpp" />
+    <ClCompile Include="Actor\Item.cpp" />
     <ClCompile Include="Actor\Player.cpp" />
+    <ClCompile Include="Actor\Target.cpp" />
+    <ClCompile Include="Game\Game.cpp" />
+    <ClCompile Include="Level\MenuLevel.cpp" />
     <ClCompile Include="Level\TestLevel.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Manager\Data_Manager.cpp" />
     <ClCompile Include="Network\NetworkExample.cpp" />
     <ClCompile Include="Tile\Tile.cpp" />
     <ClCompile Include="Tile\Tile_Manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor\Ghost.h" />
+    <ClInclude Include="Actor\Item.h" />
     <ClInclude Include="Actor\Player.h" />
+    <ClInclude Include="Actor\Target.h" />
+    <ClInclude Include="Game\Game.h" />
     <ClInclude Include="Header\Define.h" />
     <ClInclude Include="Header\Include.h" />
     <ClInclude Include="Header\Struct.h" />
+    <ClInclude Include="Level\MenuLevel.h" />
     <ClInclude Include="Level\TestLevel.h" />
+    <ClInclude Include="Manager\Data_Manager.h" />
     <ClInclude Include="Network\NetworkExample.h" />
     <ClInclude Include="Tile\Tile.h" />
     <ClInclude Include="Tile\Tile_Manager.h" />

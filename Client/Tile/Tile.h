@@ -29,9 +29,13 @@ public:
 public:
 	virtual void Draw() override;
 	void Set_ShouldDraw() { m_bShouldDraw = true; };
+	void Set_DebugDraw() { m_bShouldDraw = true; m_bDebugDraw = true; }
 	TILEINFO& Get_TileInfo() { return m_tInfo; }
 
 private:
 	TILEINFO m_tInfo;
 	bool m_bShouldDraw = true;
+
+	//Todo : Delete
+	bool m_bDebugDraw = false;
 };

@@ -1,7 +1,7 @@
 #include "PreCompiledHeader.h"
 #include "Tile_Manager.h"
 #include "Engine/Engine.h"
-
+#include <algorithm>
 
 // 스태틱 변수 초기화.
 Tile_Manager* Tile_Manager::instance = nullptr;
@@ -109,16 +109,17 @@ void Tile_Manager::Ready_Adj()
 	}
 }
 
-void Tile_Manager::Clear_Astar_List()
+void Tile_Manager::Clear_Astar_List(list<Tile*>& OutputList)
 {
 	m_OpenList.clear();
 	m_CloseList.clear();
 	m_BestList.clear();
+	OutputList.clear();
 }
 
-void Tile_Manager::Start_Astar(const Vector2& vStart, const Vector2& vGoal)
+void Tile_Manager::Start_Astar(const Vector2& vStart, const Vector2& vGoal, list<Tile*>& OutputList)
 {
-	Clear_Astar_List();
+	Clear_Astar_List(OutputList);
 
 	if (m_vTile.empty()) return;
 
@@ -135,7 +136,12 @@ void Tile_Manager::Start_Astar(const Vector2& vStart, const Vector2& vGoal)
 
 	if (Make_Route(m_iStartIndex, iGoalIndex))
 	{
-		Make_BestList(m_iStartIndex, iGoalIndex);
+		Make_BestList(m_iStartIndex, iGoalIndex, OutputList);
+		//TODO : Delete This
+		for (auto iter : m_BestList)
+		{
+			iter->Set_DebugDraw();
+		}
 	}
 }
 
@@ -168,12 +174,40 @@ bool Tile_Manager::Make_Route(int iStartIndex, int iGoalIndex)
 		return false;
 
 	int iOriginStart = iStartIndex;
-	
-	return true;
+
+	m_OpenList.sort([&](int iDst, int iSrc)
+		{
+			Vector2 vPCost1 = m_vTile[iOriginStart]->Position() - m_vTile[iDst]->Position();
+			Vector2 vPCost2 = m_vTile[iOriginStart]->Position() - m_vTile[iSrc]->Position();
+
+			Vector2 vGCost1 = m_vTile[iGoalIndex]->Position() - m_vTile[iDst]->Position();
+			Vector2 vGCost2 = m_vTile[iGoalIndex]->Position() - m_vTile[iSrc]->Position();
+
+			float fCost1 = vPCost1.Length() + vGCost1.Length();
+			float fCost2 = vPCost2.Length() + vGCost2.Length();
+
+			return fCost1 < fCost2;
+		});
+
+	return Make_Route(m_OpenList.front(), iGoalIndex);
 }
 
-void Tile_Manager::Make_BestList(int iStartIndex, int iGoalIndex)
+void Tile_Manager::Make_BestList(int iStartIndex, int iGoalIndex, list<Tile*>& OutputList)
 {
+	OutputList.push_back(m_vTile[iGoalIndex]);
+	m_BestList.push_front(m_vTile[iGoalIndex]);
+
+	int iRouteIndex = m_vTile[iGoalIndex]->Get_TileInfo().iParentIndex;
+
+	while (true)
+	{
+		if (iRouteIndex == iStartIndex)
+			break;
+
+		m_BestList.push_front(m_vTile[iRouteIndex]);
+		OutputList.push_front(m_vTile[iRouteIndex]);
+		iRouteIndex = m_vTile[iRouteIndex]->Get_TileInfo().iParentIndex;
+	}
 }
 
 bool Tile_Manager::Check_Open(int iIndex)

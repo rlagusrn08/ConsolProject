@@ -1,14 +1,14 @@
 ﻿#include "Player.h"
 #include "Include.h"
 #include "Tile/Tile_Manager.h"
-
-
+#include "Manager/Data_Manager.h"
+#include "Game/Game.h"
 
 Player::Player(const Vector2& _position)
-	: DrawableActor("C")
+	: DrawableActor("O")
 {
 	this->position = _position;
-	color = Color::White;
+	color = Color::Yellow;
 }
 
 void Player::Update(float deltaTime)
@@ -22,6 +22,13 @@ void Player::Update(float deltaTime)
 
 void Player::Get_KeyDown()
 {
+	if (Engine::Get().GetKeyDown(VK_ESCAPE))
+	{
+		//Engine::Get().QuitGame();
+		// 메뉴 토글.
+		Game::Get().ToggleMenu();
+	}
+
 	Vector2 newPosition;
 	if (ENGINE.GetKeyDown(VK_LEFT))
 	{
@@ -30,7 +37,7 @@ void Player::Get_KeyDown()
 		{
 			m_eDir = MOVE_LEFT;
 			m_fCurrentSpeed = m_fSpeedX;
-			Change_Image("⊃");
+			Change_Image("L");
 		}
 	}
 	else if (ENGINE.GetKeyDown(VK_RIGHT))
@@ -40,7 +47,7 @@ void Player::Get_KeyDown()
 		{
 			m_eDir = MOVE_RIGHT;
 			m_fCurrentSpeed = m_fSpeedX;
-			Change_Image("⊂");
+			Change_Image("R");
 		}
 	}
 	else if (ENGINE.GetKeyDown(VK_UP))
@@ -50,7 +57,7 @@ void Player::Get_KeyDown()
 		{
 			m_eDir = MOVE_UP;
 			m_fCurrentSpeed = m_fSpeedY;
-			Change_Image("∪");
+			Change_Image("U");
 		}
 	}
 	else if (ENGINE.GetKeyDown(VK_DOWN))
@@ -60,15 +67,9 @@ void Player::Get_KeyDown()
 		{
 			m_eDir = MOVE_DOWN;
 			m_fCurrentSpeed = m_fSpeedY;
-			Change_Image("∩");
+			Change_Image("D");
 		}
-	}
-
-	// TODO : Delete
-	if (ENGINE.GetKeyDown(VK_SPACE))
-	{
-		TM.Start_Astar(Vector2(1, 1), Position());
-	}
+	} 
 }
 
 void Player::Move(float deltaTime)
@@ -101,8 +102,13 @@ void Player::Move(float deltaTime)
 		if (TM.Get_Tile_Type(newPosition) == TILE_NORMAL)
 		{
 			TM.Set_ShouldDraw(Position());
+			DM.Set_Detect_Player_Move(true);
 			SetPosition(newPosition);
 		}
+	}
+	else
+	{
+		DM.Set_Detect_Player_Move(false);
 	}
 
 }

@@ -20,17 +20,20 @@ public:
 	void Set_ShouldDraw(const Vector2& pos);
 	TILE_TYPE Get_Tile_Type(const Vector2& pos);
 	int Get_Tile_Index(const Vector2& pos);
-
+	int Get_Tile_SizeX() { return m_iSizeX; }
+	int Get_Tile_SizeY() { return m_iSizeY; }
+	
 public:
 	//For. Astar
+	void Start_Astar(const Vector2& vStart, const Vector2& vGoal, list<Tile*>& OutputList);
+
+private:
 	void Ready_Adj();
-	void Clear_Astar_List();
-	void Start_Astar(const Vector2& vStart, const Vector2& vGoal);
+	void Clear_Astar_List(list<Tile*>& OutputList);
 	bool Make_Route(int iStartIndex, int iGoalIndex);
-	void Make_BestList(int iStartIndex, int iGoalIndex);
+	void Make_BestList(int iStartIndex, int iGoalIndex, list<Tile*>& OutputList);
 	bool Check_Open(int iIndex);
 	bool Check_Close(int iIndex);
-
 private:
 	static Tile_Manager* instance;
 

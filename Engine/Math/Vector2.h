@@ -15,6 +15,9 @@ public:
 	bool operator!=(const Vector2& other);
 
 public:
+	float Length();
+
+public:
 	// xÁÂÇ¥ / yÁÂÇ¥.
 	int x = 0;
 	int y = 0;

@@ -5,13 +5,21 @@
 #include <Windows.h>
 #include "Tile/Tile_Manager.h"
 #include "Actor/Ghost.h"
+#include "Manager/Data_Manager.h"
+#include "Actor/Item.h"
+#include "Actor/Target.h"
 
 TestLevel::TestLevel()
 {
 	ENGINE.SetCursorType(CursorType::NoCursor);
 	m_pPlayer = new Player(Vector2(5, 5));
+	DM.Set_Player_Pointer(m_pPlayer);
 	AddActor(m_pPlayer);
-	actors.PushBack(new Ghost(Vector2(1, 1)));
+	actors.PushBack(new Target(Vector2(1, 1)));
+	actors.PushBack(new Item(Vector2(3, 1)));
+	actors.PushBack(new Target(Vector2(5, 1)));
+	actors.PushBack(new Target(Vector2(7, 1)));
+
 	m_pTile_Manager = new Tile_Manager();
 }
 
@@ -29,12 +37,6 @@ void TestLevel::Update(float deltaTime)
 	{
 		return;
 	}
-
-	// ESC 키로 종료.
-	if (Engine::Get().GetKeyDown(VK_ESCAPE))
-	{
-		Engine::Get().QuitGame();
-	}
 }
 
 void TestLevel::Draw()
@@ -42,4 +44,5 @@ void TestLevel::Draw()
 	Super::Draw();
 
 	TM.Draw();
+	DM.Draw();
 }

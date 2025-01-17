@@ -20,7 +20,6 @@ public:
 
 public:
 	virtual void Update(float deltaTime) override;
-
 public:
 	void Get_KeyDown();
 	void Move(float deltaTime);
