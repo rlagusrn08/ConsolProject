@@ -33,6 +33,7 @@ public:
 	// 액터 추가/삭제 함수.
 	void AddActor(Actor* newActor);
 	void DestroyActor(Actor* targetActor);
+	void PushBackActor(Actor* newActor);
 
 	// 화면 좌표 관련 함수.
 	void SetCursorType(CursorType cursorType);

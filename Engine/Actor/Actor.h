@@ -29,6 +29,7 @@ public:
 	inline bool IsAcive() const { return isActive && !isExpired; }
 	inline void SetActive(bool active) { isActive = active; }
 	inline void Destroy() { isExpired = true; }
+	virtual const char* Serialize();
 
 protected:
 	// 액터의 위치.

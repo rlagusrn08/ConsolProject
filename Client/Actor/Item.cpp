@@ -16,3 +16,10 @@ void Item::Update(float delatTime)
 		Destroy();
 	}
 }
+
+const char* Item::Serialize()
+{
+	char* buffer = new char[256];
+	snprintf(buffer, 256, "I %d %d\n", Position().x, Position().y);
+	return buffer;
+}

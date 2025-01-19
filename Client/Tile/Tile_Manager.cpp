@@ -30,7 +30,7 @@ Tile_Manager::Tile_Manager()
 				pTile->Get_TileInfo().eOption = TILE_NORMAL;
 			}
 
-			pTile->Get_TileInfo().vPos = Vector2(j, i);
+			pTile->SetPosition(Vector2(j, i));
 			pTile->Get_TileInfo().iIndex = index++;
 			m_vTile.push_back(pTile);
 		}
@@ -62,6 +62,7 @@ void Tile_Manager::Clear()
 		SafeDelete(m_vTile[i]);
 	}
 	m_vTile.clear();
+	m_vTile.shrink_to_fit();
 }
 
 void Tile_Manager::Set_ShouldDraw(const Vector2& pos)
@@ -171,7 +172,10 @@ void Tile_Manager::Load_Tile(const char* path)
 		fgets(buffer, 256, file);
 
 		// °èÁÂ À¯Çü.
-		sscanf_s(buffer, "%d %d", &m_iSizeX + 1, &m_iSizeY + 1);
+		sscanf_s(buffer, "%d %d", &m_iSizeX, &m_iSizeY);
+
+		m_iSizeX++;
+		m_iSizeY++;
 
 		int index = 0;
 		for (int i = 0; i < m_iSizeY; i++)
@@ -190,6 +194,7 @@ void Tile_Manager::Load_Tile(const char* path)
 			int iX = -1, iY = -1;
 			sscanf_s(buffer, "%d %d", &iX, &iY);
 
+			if (iX == -1 || iY == -1) break;
 			m_vTile[Get_Tile_Index(Vector2(iX, iY))]->Set_Type(TILE_TYPE::TILE_WALL);
 		}
 		// ÆÄÀÏ ´Ý±â.

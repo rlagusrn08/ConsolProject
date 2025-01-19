@@ -14,6 +14,7 @@ public:
 
 public:
 	virtual void Update(float delatTime);
+	virtual const char* Serialize() override;
 	void Make_Route();
 	void Move(float deltaTime);
 private:

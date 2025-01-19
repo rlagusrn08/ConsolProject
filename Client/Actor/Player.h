@@ -20,10 +20,12 @@ public:
 
 public:
 	virtual void Update(float deltaTime) override;
+	virtual const char* Serialize() override;
 public:
 	void Get_KeyDown();
 	void Game_Move(float deltaTime);
 	void Tool_Move(float deltaTime);
+
 private:
 	MOVE_DIRECTION m_eDir = { MOVE_NONE };
 	const float m_fSpeedX = 7.5f;

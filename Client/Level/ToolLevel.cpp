@@ -15,7 +15,7 @@ ToolLevel::ToolLevel()
 
 ToolLevel::~ToolLevel()
 {
-	TM.Clear();
+	
 }
 
 void ToolLevel::Update(float deltaTime)
@@ -45,14 +45,14 @@ void ToolLevel::Get_KeyDown()
 
 		actors.PushBack(new Target(DM.Get_Player_Position()));
 	}
-	if (ENGINE.GetKeyDown('3')) // 2 score
+	if (ENGINE.GetKeyDown('3')) // 3 Item
 	{
 		TM.Delete_Tile(DM.Get_Player_Position());
 		Delete_Actor(DM.Get_Player_Position());
 
 		actors.PushBack(new Item(DM.Get_Player_Position()));
 	}
-	if (ENGINE.GetKeyDown('4')) // 2 score
+	if (ENGINE.GetKeyDown('4')) // 4 Ghost
 	{
 		TM.Delete_Tile(DM.Get_Player_Position());
 		Delete_Actor(DM.Get_Player_Position());
@@ -63,6 +63,7 @@ void ToolLevel::Get_KeyDown()
 	if (ENGINE.GetKeyDown('S')) // save
 	{
 		TM.Save_Tile();
+		Save_Actor();
 	}
 	if (ENGINE.GetKeyDown('L')) // save
 	{
@@ -99,6 +100,30 @@ void ToolLevel::Delete_Actor(const Vector2& vPosition)
 			(*iter)->Destroy();
 			break;
 		}
+	}
+}
+
+void ToolLevel::Save_Actor()
+{
+	// 저장할 데이터 생성.
+	char buffer[1000001];
+	memset(buffer, 0, 1000001);
+
+	for (auto iter : actors)
+	{
+		// 각 계좌별로 문자열 데이터로 직렬화.
+		const char* data = iter->Serialize();
+		strcat_s(buffer, data);
+		delete data;
+	}
+
+	// 파일 저장.
+	FILE* file = nullptr;
+	fopen_s(&file, "../Data/Actor.txt", "wb");
+	if (file)
+	{
+		fwrite(buffer, strlen(buffer) + 1, 1, file);
+		fclose(file);
 	}
 }
 

@@ -143,3 +143,10 @@ void Player::Tool_Move(float deltaTime)
 	}
 	SetPosition(position);
 }
+
+const char* Player::Serialize()
+{
+	char* buffer = new char[256];
+	snprintf(buffer, 256, "P %d %d\n", Position().x, Position().y);
+	return buffer;
+}

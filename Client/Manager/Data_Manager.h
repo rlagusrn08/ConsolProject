@@ -28,7 +28,7 @@ public:
 	
 	void Set_Mode(MODE eMode) { currentMode = eMode; }
 	MODE Get_Mode() { return currentMode; }
-
+	void Load_Actor(const char* path);
 private:
 	static Data_Manager* instance;
 

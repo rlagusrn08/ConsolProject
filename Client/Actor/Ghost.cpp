@@ -16,6 +16,13 @@ void Ghost::Update(float deltaTime)
 	Move(deltaTime);
 }
 
+const char* Ghost::Serialize()
+{
+	char* buffer = new char[256];
+	snprintf(buffer, 256, "G %d %d\n", Position().x, Position().y);
+	return buffer;
+}
+
 void Ghost::Make_Route()
 {
 	if (DM.Get_Mode() != GAME_MODE) return;

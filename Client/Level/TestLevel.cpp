@@ -11,6 +11,7 @@
 
 TestLevel::TestLevel()
 {
+	TM.Clear();
 	ENGINE.SetCursorType(CursorType::NoCursor);
 	m_pPlayer = new Player(Vector2(5, 5));
 	DM.Set_Player_Pointer(m_pPlayer);
@@ -19,13 +20,11 @@ TestLevel::TestLevel()
 	actors.PushBack(new Item(Vector2(3, 1)));
 	actors.PushBack(new Target(Vector2(5, 1)));
 	actors.PushBack(new Target(Vector2(7, 1)));
-
-	
 }
 
 TestLevel::~TestLevel()
 {
-	TM.Clear();
+	
 }
 
 void TestLevel::Update(float deltaTime)

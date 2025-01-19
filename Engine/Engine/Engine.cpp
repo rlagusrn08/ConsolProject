@@ -203,6 +203,11 @@ void Engine::DestroyActor(Actor* targetActor)
 	targetActor->Destroy();
 }
 
+void Engine::PushBackActor(Actor* newActor)
+{
+	mainLevel->PushBackActor(newActor);
+}
+
 void Engine::SetCursorType(CursorType cursorType)
 {
 	GetRenderer()->SetCursorType(cursorType);

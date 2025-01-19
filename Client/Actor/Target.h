@@ -12,4 +12,5 @@ public:
 public:
 	virtual void Update(float delatTime);
 	virtual void Draw();
+	virtual const char* Serialize() override;
 };

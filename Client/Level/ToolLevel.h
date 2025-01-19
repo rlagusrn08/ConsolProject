@@ -18,7 +18,8 @@ public:
 	void Get_KeyDown();
 	bool Find_Actor(const Vector2& vPosition);
 	void Delete_Actor(const Vector2& vPosition);
-
+	void Save_Actor();
+	
 private:
 	Tile_Manager* m_pTile_Manager = nullptr;
 	Player* m_pPlayer = nullptr;

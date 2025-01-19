@@ -29,3 +29,8 @@ inline Vector2 Actor::Position() const
 {
 	return position;
 }
+
+const char* Actor::Serialize()
+{
+	return nullptr;
+}
