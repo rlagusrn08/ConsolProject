@@ -184,6 +184,7 @@ void Tile_Manager::Load_Tile(const char* path)
 			{
 				Tile* pTile = new Tile(Vector2(j, i));
 				pTile->Get_TileInfo().iIndex = index++;
+				pTile->Get_TileInfo().eOption = TILE_NORMAL;
 				m_vTile.push_back(pTile);
 			}
 		}
@@ -197,6 +198,7 @@ void Tile_Manager::Load_Tile(const char* path)
 			if (iX == -1 || iY == -1) break;
 			m_vTile[Get_Tile_Index(Vector2(iX, iY))]->Set_Type(TILE_TYPE::TILE_WALL);
 		}
+		Ready_Adj();
 		// ÆÄÀÏ ´Ý±â.
 		fclose(file);
 	}
@@ -204,6 +206,8 @@ void Tile_Manager::Load_Tile(const char* path)
 
 void Tile_Manager::Ready_Adj()
 {
+	m_vAdjTile.clear();
+	m_vAdjTile.shrink_to_fit();
 	m_vAdjTile.resize(m_vTile.size());
 
 	for (int i = 0; i < m_iSizeY; i++)

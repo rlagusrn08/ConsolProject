@@ -24,6 +24,9 @@ public:
 	void Set_Player_Pointer(Player* _player) { CurrentPlayer = _player; }
 	void Set_Detect_Player_Move(bool _value) { bDetectPlayerMove = _value; }
 	bool Get_Detect_Player_Move() { return bDetectPlayerMove; }
+	bool Get_ItemActive() { return bItemActive; }
+	void Set_ItemActive(bool _bCheck) { bItemActive = _bCheck; }
+	float Get_Distance_With_Player(const Vector2& _position);
 	void Increase_Score(int _score) { score += _score; }
 	
 	void Set_Mode(MODE eMode) { currentMode = eMode; }
@@ -34,6 +37,7 @@ private:
 
 private:
 	Player* CurrentPlayer = nullptr;
+	bool bItemActive = false;
 	bool bDetectPlayerMove = false;
 	int score = 0;
 	MODE currentMode = MENU_MODE;

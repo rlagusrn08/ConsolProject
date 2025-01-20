@@ -197,6 +197,9 @@ xcopy $(OutDir)\Engine.dll $(SolutionDir)Bin\$(Platform)\$(Configuration)\Client
   <ItemGroup>
     <ClInclude Include="Actor\Actor.h" />
     <ClInclude Include="Actor\DrawableActor.h" />
+    <ClInclude Include="BehaviorTree\ActionNode.h" />
+    <ClInclude Include="BehaviorTree\Node.h" />
+    <ClInclude Include="BehaviorTree\SelectorNode.h" />
     <ClInclude Include="Container\List.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Engine\Engine.h" />
@@ -207,10 +210,14 @@ xcopy $(OutDir)\Engine.dll $(SolutionDir)Bin\$(Platform)\$(Configuration)\Client
     <ClInclude Include="PreCompiledHeader\PreCompiledHeader.h" />
     <ClInclude Include="Render\ScreenBuffer.h" />
     <ClInclude Include="RTTI.h" />
+    <ClInclude Include="BehaviorTree\SequenceNode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Actor.cpp" />
     <ClCompile Include="Actor\DrawableActor.cpp" />
+    <ClCompile Include="BehaviorTree\ActionNode.cpp" />
+    <ClCompile Include="BehaviorTree\Node.cpp" />
+    <ClCompile Include="BehaviorTree\SelectorNode.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Level\Level.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -222,6 +229,7 @@ xcopy $(OutDir)\Engine.dll $(SolutionDir)Bin\$(Platform)\$(Configuration)\Client
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Render\ScreenBuffer.cpp" />
+    <ClCompile Include="BehaviorTree\SequenceNode.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

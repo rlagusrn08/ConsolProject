@@ -36,3 +36,10 @@ void Data_Manager::Draw()
 		ENGINE.Draw(UIPosition, "1 : 벽, 2 : 타겟, 3: 아이템, 4 : 유령");
 	}
 }
+
+float Data_Manager::Get_Distance_With_Player(const Vector2& _position)
+{
+	Vector2 v = CurrentPlayer->Position() - _position;
+
+	return v.Length();
+}

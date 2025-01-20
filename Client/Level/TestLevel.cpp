@@ -13,14 +13,8 @@
 TestLevel::TestLevel()
 {
 	TM.Clear();
-	ENGINE.SetCursorType(CursorType::NoCursor);
-	m_pPlayer = new Player(Vector2(5, 5));
-	DM.Set_Player_Pointer(m_pPlayer);
-	AddActor(m_pPlayer);
-	actors.PushBack(new Target(Vector2(1, 1)));
-	actors.PushBack(new Item(Vector2(3, 1)));
-	actors.PushBack(new Target(Vector2(5, 1)));
-	actors.PushBack(new Target(Vector2(7, 1)));
+	TM.Load_Tile("../Data/Tile.txt");
+	Load_Actor("../Data/Actor.txt");
 }
 
 TestLevel::~TestLevel()
