@@ -4,6 +4,9 @@
 #include "Manager/Data_Manager.h"
 #include "Game/Game.h"
 #include "Item.h"
+#include "Ghost.h"
+#include "Target.h"
+#include "Game/Game.h"
 
 Player::Player(const Vector2& _position)
 	: DrawableActor("C")
@@ -165,7 +168,29 @@ void Player::Intersect(Actor* other)
 	if (other->As<Item>())
 	{
 		DM.Set_ItemActive(true);
+		other->Destroy();
 		m_tItemDurationTime.AccDurationTime = 0.f;
+		return;
+	}
+
+	if (other->As<Target>())
+	{
+		other->Destroy();
+		DM.Increase_Score(1);
+		return;
+	}
+
+	if (other->As<Ghost>())
+	{
+		if (DM.Get_ItemActive())
+		{
+			other->Destroy();
+			DM.Increase_Score(100);
+		}
+		else
+		{
+			Game::Get().Load_GameOverMenu();
+		}
 	}
 }
 

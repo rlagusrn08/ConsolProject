@@ -11,7 +11,8 @@ class GameLevel : public Level
 protected:
 	void Load_Actor(const char* path);
 	void Clear_Actor();
-	void ProcessCollisionPlayerAndItem();
+	void ProcessCollisionPlayerAndActor();
+	void Check_GameClear();
 
 private:
 	Player* m_pPlayer = nullptr;

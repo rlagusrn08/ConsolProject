@@ -14,7 +14,7 @@ TestLevel::TestLevel()
 {
 	TM.Clear();
 	TM.Load_Tile("../Data/Tile.txt");
-	Load_Actor("../Data/Actor.txt");
+	Load_Actor("../Data/Actor1.txt");
 }
 
 TestLevel::~TestLevel()
@@ -22,14 +22,11 @@ TestLevel::~TestLevel()
 	
 }
 
-
-
-
-
 void TestLevel::Update(float deltaTime)
 {
 	Super::Update(deltaTime);
-	ProcessCollisionPlayerAndItem();
+	ProcessCollisionPlayerAndActor();
+	Check_GameClear();
 	// 예외 처리.
 	if (deltaTime > 1.0f)
 	{

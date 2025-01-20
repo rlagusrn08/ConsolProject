@@ -6,7 +6,7 @@
 #include "Actor/Item.h"
 
 #include "Manager/Data_Manager.h"
-#include "Actor/Item.h"
+#include "Game/Game.h"
 
 void GameLevel::Load_Actor(const char* path)
 {
@@ -18,6 +18,7 @@ void GameLevel::Load_Actor(const char* path)
 	{
 		Clear_Actor();
 
+		List<Actor*> Ghosts;
 		char buffer[256];
 
 		while (!feof(file))
@@ -45,9 +46,13 @@ void GameLevel::Load_Actor(const char* path)
 				actors.PushBack(new Item(Vector2(iX, iY)));
 				break;
 			case 'G':
-				actors.PushBack(new Ghost(Vector2(iX, iY)));
+				Ghosts.PushBack(new Ghost(Vector2(iX, iY)));
 				break;
 			}
+		}
+		for (auto iter : Ghosts)
+		{
+			actors.PushBack(iter);
 		}
 	}
 }
@@ -60,15 +65,24 @@ void GameLevel::Clear_Actor()
 	}
 }
 
-void GameLevel::ProcessCollisionPlayerAndItem()
+void GameLevel::ProcessCollisionPlayerAndActor()
 {
 	for (auto iter : actors)
 	{
-		Item* item = iter->As<Item>();
-		if (item && item->Position() == DM.Get_Player_Position())
+		if (iter->As<Player>()) continue;
+
+		if (iter->Position() == DM.Get_Player_Position())
 		{
-			item->Destroy();
-			m_pPlayer->Intersect(item);
+			m_pPlayer->Intersect(iter);
 		}
 	}
+}
+
+void GameLevel::Check_GameClear()
+{
+	for (auto iter : actors)
+	{
+		if (iter->As<Target>()) return;
+	}
+	Game::Get().Load_ClearMenu();
 }

@@ -12,6 +12,7 @@ Engine* engine = nullptr;
 int main()
 {
 	CheckMemoryLeak();
+	srand((unsigned)time(NULL));
 
 	//Set Manager
 	Data_Manager dm;

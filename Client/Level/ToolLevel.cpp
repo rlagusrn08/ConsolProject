@@ -62,8 +62,8 @@ void ToolLevel::Get_KeyDown()
 
 	if (ENGINE.GetKeyDown('S')) // save
 	{
-		TM.Save_Tile();
 		Save_Actor();
+		TM.Save_Tile();
 	}
 	if (ENGINE.GetKeyDown('L')) // save
 	{
@@ -112,7 +112,6 @@ void ToolLevel::Save_Actor()
 
 	for (auto iter : actors)
 	{
-		// 각 계좌별로 문자열 데이터로 직렬화.
 		const char* data = iter->Serialize();
 		strcat_s(buffer, data);
 		delete data;
@@ -120,11 +119,17 @@ void ToolLevel::Save_Actor()
 
 	// 파일 저장.
 	FILE* file = nullptr;
-	fopen_s(&file, "../Data/Actor.txt", "wb");
+	auto error = fopen_s(&file, "../Data/Actor.txt", "wb");
 	if (file)
 	{
 		fwrite(buffer, strlen(buffer) + 1, 1, file);
 		fclose(file);
+	}
+	else
+	{
+		char buffer[256];
+		sprintf_s(buffer, 256, "save actor error: %d\n", error);
+		OutputDebugStringA(buffer);
 	}
 }
 

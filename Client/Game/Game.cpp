@@ -5,6 +5,8 @@
 #include "Level/TestLevel.h"
 #include "Level/MainMenuLevel.h"
 #include "Level/ToolLevel.h"
+#include "Level/GameOverLevel.h"
+#include "Level/GameClearLevel.h"
 
 Game* Game::instance = nullptr;
 
@@ -53,9 +55,12 @@ void Game::ToggleMenu()
 void Game::Load_MainMenu()
 {
 	DM.Set_Mode(MODE::MENU_MODE);
-	showMenu = false;
-	mainLevel = backLevel;
-	
+	if (showMenu)
+	{
+		showMenu = false;
+		mainLevel = backLevel;
+	}
+
 	ENGINE.ChangeLevel(new MainMenuLevel());
 }
 
@@ -69,4 +74,16 @@ void Game::Load_Level1()
 {
 	DM.Set_Mode(MODE::GAME_MODE);
 	ENGINE.ChangeLevel(new TestLevel());
+}
+
+void Game::Load_GameOverMenu()
+{
+	DM.Set_Mode(MODE::MENU_MODE);
+	ENGINE.ChangeLevel(new GameOverLevel());
+}
+
+void Game::Load_ClearMenu()
+{
+	DM.Set_Mode(MODE::MENU_MODE);
+	ENGINE.ChangeLevel(new GameClearLevel());
 }

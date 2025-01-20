@@ -316,7 +316,7 @@ Node::STATE Ghost::Stop(float deltaTime)
 
 void Ghost::Make_BehaviorTree()
 {
-	//                                             Selector
+	//                                                  RootSelector
 	//           RunAway                            Attack                             Patrol                Stop
 	//  Plyaer State Check - RunAway       CoolTime, Distance Check - Trace      CanMove? - RandomMove       Stop
 
