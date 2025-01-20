@@ -22,3 +22,15 @@ struct MenuItem
 	char* menuText;
 	OnSelected onSelected;
 };
+
+struct CoolTimeInfo
+{
+	float CoolTime = 0.f;
+	float AccCoolTime = 0.f;
+};
+
+struct DurationTimeInfo
+{
+	float DurationTime = 0.f;
+	float AccDurationTime = 0.f;
+};

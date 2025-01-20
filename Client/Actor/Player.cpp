@@ -3,18 +3,23 @@
 #include "Tile/Tile_Manager.h"
 #include "Manager/Data_Manager.h"
 #include "Game/Game.h"
+#include "Item.h"
 
 Player::Player(const Vector2& _position)
 	: DrawableActor("C")
 {
 	this->position = _position;
 	color = Color::Yellow;
+
+	m_tItemDurationTime.DurationTime = 8.f;
+	m_tItemDurationTime.AccDurationTime = 0.f;
 }
 
 void Player::Update(float deltaTime)
 {
 	Super::Update(deltaTime);
 
+	Check_Active_Item(deltaTime);
 	Get_KeyDown();
 	Game_Move(deltaTime);
 	Tool_Move(deltaTime);
@@ -102,7 +107,6 @@ void Player::Game_Move(float deltaTime)
 
 		if (TM.Get_Tile_Type(newPosition) == TILE_NORMAL)
 		{
-			TM.Set_ShouldDraw(Position());
 			DM.Set_Detect_Player_Move(true);
 			SetPosition(newPosition);
 		}
@@ -142,6 +146,27 @@ void Player::Tool_Move(float deltaTime)
 		position = Vector2(Position().x, Position().y + 1);
 	}
 	SetPosition(position);
+}
+
+void Player::Check_Active_Item(float deltaTime)
+{
+	if (DM.Get_ItemActive())
+	{
+		m_tItemDurationTime.AccDurationTime += deltaTime;
+		if (m_tItemDurationTime.AccDurationTime >= m_tItemDurationTime.DurationTime)
+		{
+			DM.Set_ItemActive(false);
+		}
+	}
+}
+
+void Player::Intersect(Actor* other)
+{
+	if (other->As<Item>())
+	{
+		DM.Set_ItemActive(true);
+		m_tItemDurationTime.AccDurationTime = 0.f;
+	}
 }
 
 const char* Player::Serialize()

@@ -29,7 +29,7 @@ TestLevel::~TestLevel()
 void TestLevel::Update(float deltaTime)
 {
 	Super::Update(deltaTime);
-
+	ProcessCollisionPlayerAndItem();
 	// 예외 처리.
 	if (deltaTime > 1.0f)
 	{

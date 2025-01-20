@@ -6,6 +6,7 @@
 #include "Actor/Item.h"
 
 #include "Manager/Data_Manager.h"
+#include "Actor/Item.h"
 
 void GameLevel::Load_Actor(const char* path)
 {
@@ -32,9 +33,9 @@ void GameLevel::Load_Actor(const char* path)
 			{
 			case 'P':
 			{
-				Player * p = new Player(Vector2(iX, iY));
-				DM.Set_Player_Pointer(p);
-				actors.PushBack(p);
+				m_pPlayer = new Player(Vector2(iX, iY));
+				DM.Set_Player_Pointer(m_pPlayer);
+				actors.PushBack(m_pPlayer);
 				break;
 			}
 			case 'T':
@@ -56,5 +57,18 @@ void GameLevel::Clear_Actor()
 	for (auto iter : actors)
 	{
 		iter->Destroy();
+	}
+}
+
+void GameLevel::ProcessCollisionPlayerAndItem()
+{
+	for (auto iter : actors)
+	{
+		Item* item = iter->As<Item>();
+		if (item && item->Position() == DM.Get_Player_Position())
+		{
+			item->Destroy();
+			m_pPlayer->Intersect(item);
+		}
 	}
 }

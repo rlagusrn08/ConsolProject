@@ -65,16 +65,12 @@ void Tile_Manager::Clear()
 	m_vTile.shrink_to_fit();
 }
 
-void Tile_Manager::Set_ShouldDraw(const Vector2& pos)
-{
-	if (pos.y < 0 || pos.x < 0 || pos.y >= Engine::Get().ScreenSize().y || pos.y >= Engine::Get().ScreenSize().x) return;
-	int temp = pos.y * m_iSizeX + pos.x;
-	m_vTile[Get_Tile_Index(pos)]->Set_ShouldDraw();
-}
-
 TILE_TYPE Tile_Manager::Get_Tile_Type(const Vector2& pos)
 {
-	if (pos.y < 0 || pos.x < 0 || pos.y >= Engine::Get().ScreenSize().y || pos.y >= Engine::Get().ScreenSize().x) return TILE_END;
+	if (pos.y < 0 || pos.x < 0 || pos.y >= Engine::Get().ScreenSize().y || pos.y >= Engine::Get().ScreenSize().x 
+		|| Get_Tile_Index(pos) >= m_vTile.size()) 
+		return TILE_END;
+
 	return m_vTile[Get_Tile_Index(pos)]->Get_TileInfo().eOption;
 }
 

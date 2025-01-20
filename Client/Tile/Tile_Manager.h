@@ -18,7 +18,6 @@ public:
 	static Tile_Manager& Get() { return *instance; }
 	void Draw();
 	void Clear();
-	void Set_ShouldDraw(const Vector2& pos);
 	TILE_TYPE Get_Tile_Type(const Vector2& pos);
 	int Get_Tile_Index(const Vector2& pos);
 	int Get_Tile_SizeX() { return m_iSizeX; }

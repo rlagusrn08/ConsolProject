@@ -30,6 +30,7 @@ public:
 	inline void SetActive(bool active) { isActive = active; }
 	inline void Destroy() { isExpired = true; }
 	virtual const char* Serialize();
+	virtual void Intersect(Actor* other);
 
 protected:
 	// 액터의 위치.

@@ -34,3 +34,7 @@ const char* Actor::Serialize()
 {
 	return nullptr;
 }
+
+void Actor::Intersect(Actor* other)
+{
+}

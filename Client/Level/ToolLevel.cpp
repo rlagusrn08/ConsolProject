@@ -35,7 +35,7 @@ void ToolLevel::Get_KeyDown()
 	if (ENGINE.GetKeyDown('1')) // 1 wall
 	{
 		Delete_Actor(DM.Get_Player_Position());
-
+		TM.Delete_Tile(DM.Get_Player_Position());
 		TM.Insert_Tile(DM.Get_Player_Position());
 	}
 	if (ENGINE.GetKeyDown('2')) // 2 score
