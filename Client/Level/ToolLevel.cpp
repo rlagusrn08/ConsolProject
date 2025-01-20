@@ -68,6 +68,7 @@ void ToolLevel::Get_KeyDown()
 	if (ENGINE.GetKeyDown('L')) // save
 	{
 		TM.Load_Tile("../Data/Tile.txt");
+		Load_Actor("../Data/Actor.txt");
 	}
 	if (ENGINE.GetKeyDown(VK_DELETE)) // delete
 	{

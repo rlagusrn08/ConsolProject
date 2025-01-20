@@ -8,6 +8,7 @@
 #include "Manager/Data_Manager.h"
 #include "Actor/Item.h"
 #include "Actor/Target.h"
+#include "GameLevel.h"
 
 TestLevel::TestLevel()
 {
@@ -26,6 +27,10 @@ TestLevel::~TestLevel()
 {
 	
 }
+
+
+
+
 
 void TestLevel::Update(float deltaTime)
 {

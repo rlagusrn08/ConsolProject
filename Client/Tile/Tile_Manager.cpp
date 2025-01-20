@@ -126,11 +126,11 @@ void Tile_Manager::Save_Tile()
 	int maxX = 0, maxY = 0;
 	for (auto iter : m_vTile)
 	{
+		if (iter->Get_TileInfo().eOption == 0) continue;
 		if (maxX < iter->Position().x) maxX = iter->Position().x;
 		if (maxY < iter->Position().y) maxY = iter->Position().y;
 	}
 
-	// 저장할 데이터 생성.
 	char buffer[1000001];
 	memset(buffer, 0, 1000001);
 
@@ -142,7 +142,7 @@ void Tile_Manager::Save_Tile()
 
 	for (auto iter : m_vTile)
 	{
-		// 각 계좌별로 문자열 데이터로 직렬화.
+		if (iter->Get_TileInfo().eOption == 0) continue;
 		const char* data = iter->Serialize();
 		strcat_s(buffer, data);
 		delete data;
@@ -168,10 +168,10 @@ void Tile_Manager::Load_Tile(const char* path)
 	{
 		Clear();
 		char buffer[256];
-		// 한 줄씩 읽기.
+		
 		fgets(buffer, 256, file);
 
-		// 계좌 유형.
+	
 		sscanf_s(buffer, "%d %d", &m_iSizeX, &m_iSizeY);
 
 		m_iSizeX++;

@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Level/Level.h"
+#include "Level/GameLevel.h"
 #include "Actor/Player.h"
 
 class Tile_Manager;
-class TestLevel : public Level
+class TestLevel : public GameLevel
 {
 	// RTTI Àû¿ë.
-	RTTI_DECLARATIONS(TestLevel, Level)
+	RTTI_DECLARATIONS(TestLevel, GameLevel)
 
 public:
 	TestLevel();
@@ -17,6 +17,5 @@ public:
 	virtual void Draw() override;
 
 private:
-	Tile_Manager* m_pTile_Manager = nullptr;
 	Player* m_pPlayer = nullptr;
 };

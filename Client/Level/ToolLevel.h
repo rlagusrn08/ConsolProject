@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Level/Level.h"
+#include "Level/GameLevel.h"
 #include "Actor/Player.h"
 
 class Tile_Manager;
-class ToolLevel : public Level
+class ToolLevel : public GameLevel
 {
 	// RTTI Àû¿ë.
-	RTTI_DECLARATIONS(ToolLevel, Level)
+	RTTI_DECLARATIONS(ToolLevel, GameLevel)
 
 public:
 	ToolLevel();

@@ -36,15 +36,3 @@ void Data_Manager::Draw()
 		ENGINE.Draw(UIPosition, "1 : 벽, 2 : 타겟, 3: 아이템, 4 : 유령");
 	}
 }
-
-void Data_Manager::Load_Actor(const char* path)
-{
-	// 파일 로드.
-	FILE* file = nullptr;
-	fopen_s(&file, path, "rb");
-
-	if (file)
-	{
-		
-	}
-}
