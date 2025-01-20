@@ -14,7 +14,7 @@ TestLevel::TestLevel()
 {
 	TM.Clear();
 	TM.Load_Tile("../Data/Tile.txt");
-	Load_Actor("../Data/Actor1.txt");
+	Load_Actor("../Data/Actor.txt");
 }
 
 TestLevel::~TestLevel()
