@@ -54,7 +54,10 @@ void GameLevel::Load_Actor(const char* path)
 		{
 			actors.PushBack(iter);
 		}
+
+		fclose(file);
 	}
+
 }
 
 void GameLevel::Clear_Actor()

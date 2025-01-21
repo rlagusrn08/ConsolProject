@@ -6,7 +6,6 @@
 #include "Item.h"
 #include "Ghost.h"
 #include "Target.h"
-#include "Game/Game.h"
 
 Player::Player(const Vector2& _position)
 	: DrawableActor("C")
@@ -14,7 +13,7 @@ Player::Player(const Vector2& _position)
 	this->position = _position;
 	color = Color::Yellow;
 
-	m_tItemDurationTime.DurationTime = 8.f;
+	m_tItemDurationTime.DurationTime = 7.f;
 	m_tItemDurationTime.AccDurationTime = 0.f;
 }
 

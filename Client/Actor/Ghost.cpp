@@ -10,8 +10,8 @@ Ghost::Ghost(const Vector2& _position)
 	this->position = _position;
 	color = Color::Red;
 
-	m_tAttackDurationTimeInfo.DurationTime = 8.f;
-	m_tAttackCoolTimeInfo.CoolTime = 5.f;
+	m_tAttackDurationTimeInfo.DurationTime = 15.f;
+	m_tAttackCoolTimeInfo.CoolTime = 3.f;
 
 	if (DM.Get_Mode() == GAME_MODE)
 	{
@@ -57,7 +57,7 @@ Node::STATE Ghost::Check_Player_Item_Active(float deltaTime)
 {
 	if (DM.Get_ItemActive())
 	{
-		color = Color::Blue;
+		color = Color::Sky;
 		return Node::STATE::SUCCESS;
 	}
 	else

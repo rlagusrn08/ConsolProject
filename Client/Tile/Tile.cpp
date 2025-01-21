@@ -3,6 +3,7 @@
 Tile::Tile(const Vector2& _position)
 {
 	position = _position;
+	color = Color::Blue;
 }
 
 void Tile::Draw()

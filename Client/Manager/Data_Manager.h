@@ -27,6 +27,7 @@ public:
 	bool Get_ItemActive() { return bItemActive; }
 	void Set_ItemActive(bool _bCheck) { bItemActive = _bCheck; }
 	float Get_Distance_With_Player(const Vector2& _position);
+	void Reset_Score() { score = 0; }
 	void Increase_Score(int _score) { score += _score; }
 	
 	void Set_Mode(MODE eMode) { currentMode = eMode; }
