@@ -1,10 +1,24 @@
 #include "GameOverLevel.h"
 #include "Game/Game.h"
 #include <Define.h>
+#include "Manager/Data_Manager.h"
 
 GameOverLevel::GameOverLevel()
 {
-	menuItems.PushBack(new MenuItem("Restart", []() { Game::Get().Load_Level1(); }));
+	menuItems.PushBack(new MenuItem("Restart", []() {
+		switch (DM.Get_Level())
+		{
+		case GAMELEVEL1:
+			Game::Get().Load_Level1();
+			break;
+		case GAMELEVEL2:
+			Game::Get().Load_Level2();
+			break;
+		case GAMELEVEL3:
+			Game::Get().Load_Level3();
+			break;
+		}
+		}));
 	menuItems.PushBack(new MenuItem("MainMenu", []() { Game::Get().Load_MainMenu(); }));
 	menuItems.PushBack(new MenuItem("Quit Game", []() { Game::Get().QuitGame(); }));
 	length = menuItems.Size();

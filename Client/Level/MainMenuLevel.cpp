@@ -1,9 +1,11 @@
 #include "MainMenuLevel.h"
 #include "Game/Game.h"
 #include <Define.h>
+#include "Manager/Data_Manager.h"
 
 MainMenuLevel::MainMenuLevel()
 {
+	DM.Set_Level(GAMELEVEL_END);
 	menuItems.PushBack(new MenuItem("Start Game", []() { Game::Get().Load_Level1(); }));
 	menuItems.PushBack(new MenuItem("Tool Mode", []() { Game::Get().Load_ToolLevel(); }));
 	menuItems.PushBack(new MenuItem("Quit Game", []() { Game::Get().QuitGame(); }));

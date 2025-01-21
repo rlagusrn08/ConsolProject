@@ -163,8 +163,10 @@
     <ClCompile Include="Level\GameClearLevel.cpp" />
     <ClCompile Include="Level\GameLevel.cpp" />
     <ClCompile Include="Level\GameOverLevel.cpp" />
+    <ClCompile Include="Level\Level2.cpp" />
+    <ClCompile Include="Level\Level3.cpp" />
     <ClCompile Include="Level\MenuLevel.cpp" />
-    <ClCompile Include="Level\TestLevel.cpp" />
+    <ClCompile Include="Level\Level1.cpp" />
     <ClCompile Include="Level\ToolLevel.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Level\MainMenuLevel.cpp" />
@@ -185,8 +187,10 @@
     <ClInclude Include="Level\GameClearLevel.h" />
     <ClInclude Include="Level\GameLevel.h" />
     <ClInclude Include="Level\GameOverLevel.h" />
+    <ClInclude Include="Level\Level2.h" />
+    <ClInclude Include="Level\Level3.h" />
     <ClInclude Include="Level\MenuLevel.h" />
-    <ClInclude Include="Level\TestLevel.h" />
+    <ClInclude Include="Level\Level1.h" />
     <ClInclude Include="Level\MainMenuLevel.h" />
     <ClInclude Include="Level\ToolLevel.h" />
     <ClInclude Include="Manager\Data_Manager.h" />

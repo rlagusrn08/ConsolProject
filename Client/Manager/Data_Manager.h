@@ -33,13 +33,20 @@ public:
 	void Set_Mode(MODE eMode) { currentMode = eMode; }
 	MODE Get_Mode() { return currentMode; }
 
+	void Set_Ready(bool bReady) { bReadyGame = bReady; }
+	bool Get_Ready() { return bReadyGame; }
+
+	void Set_Level(GAMELEVEL _level) { eCurrentLevel = _level; }
+	GAMELEVEL Get_Level() { return eCurrentLevel; }
 private:
 	static Data_Manager* instance;
 
 private:
 	Player* CurrentPlayer = nullptr;
 	bool bItemActive = false;
+	bool bReadyGame = true;
 	bool bDetectPlayerMove = false;
 	int score = 0;
+	GAMELEVEL eCurrentLevel = GAMELEVEL_END;
 	MODE currentMode = MENU_MODE;
 };

@@ -30,11 +30,16 @@ void Player::Update(float deltaTime)
 void Player::Get_KeyDown()
 {
 	if (DM.Get_Mode() != MODE::GAME_MODE) return;
+	
 	if (Engine::Get().GetKeyDown(VK_ESCAPE))
 	{
 		//Engine::Get().QuitGame();
 		// 메뉴 토글.
 		Game::Get().ToggleMenu();
+	}
+	if (ENGINE.GetKeyDown(VK_SPACE))
+	{
+		Game::Get().Load_ClearMenu();
 	}
 
 	Vector2 newPosition;
@@ -84,7 +89,11 @@ void Player::Game_Move(float deltaTime)
 {
 	if (m_eDir == MOVE_NONE || DM.Get_Mode() != MODE::GAME_MODE) return;
 
-	
+	if (DM.Get_Ready())
+	{
+		DM.Set_Ready(false);
+	}
+
 	m_fMovement += deltaTime * m_fCurrentSpeed;
 	if (m_fMovement >= 1.f)
 	{

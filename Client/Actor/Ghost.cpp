@@ -29,7 +29,7 @@ void Ghost::Update(float deltaTime)
 {
 	Super::Update(deltaTime);
 
-	if (DM.Get_Mode() == GAME_MODE)
+	if (DM.Get_Mode() == GAME_MODE && !DM.Get_Ready())
 	{
 		Make_Route();
 		TimeCheck(deltaTime);

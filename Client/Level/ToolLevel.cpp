@@ -65,7 +65,7 @@ void ToolLevel::Get_KeyDown()
 		Save_Actor();
 		TM.Save_Tile();
 	}
-	if (ENGINE.GetKeyDown('L')) // save
+	if (ENGINE.GetKeyDown('L')) // load
 	{
 		TM.Load_Tile("../Data/Tile.txt");
 		Load_Actor("../Data/Actor.txt");

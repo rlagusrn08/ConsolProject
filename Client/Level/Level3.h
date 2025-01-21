@@ -4,14 +4,14 @@
 #include "Actor/Player.h"
 
 class Tile_Manager;
-class TestLevel : public GameLevel
+class Level3 : public GameLevel
 {
 	// RTTI Àû¿ë.
-	RTTI_DECLARATIONS(TestLevel, GameLevel)
+	RTTI_DECLARATIONS(Level3, GameLevel)
 
 public:
-	TestLevel();
-	~TestLevel();
+	Level3();
+	~Level3();
 
 	virtual void Update(float deltaTime) override;
 	virtual void Draw() override;

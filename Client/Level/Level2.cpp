@@ -1,4 +1,4 @@
-#include "TestLevel.h"
+#include "Level2.h"
 #include "Engine/Engine.h"
 #include "Define.h"
 #include "Actor/Player.h"
@@ -10,21 +10,23 @@
 #include "Actor/Target.h"
 #include "GameLevel.h"
 
-TestLevel::TestLevel()
+Level2::Level2()
 {
+	DM.Set_Level(GAMELEVEL2);
 	DM.Reset_Score();
+	DM.Set_Ready(true);
 	DM.Set_ItemActive(false);
 	TM.Clear();
-	TM.Load_Tile("../Data/Tile.txt");
-	Load_Actor("../Data/Actor.txt");
+	TM.Load_Tile("../Data/Tile_Level2.txt");
+	Load_Actor("../Data/Actor_Level2.txt");
 }
 
-TestLevel::~TestLevel()
+Level2::~Level2()
 {
 	
 }
 
-void TestLevel::Update(float deltaTime)
+void Level2::Update(float deltaTime)
 {
 	// 예외 처리.
 	if (deltaTime > 1.0f)
@@ -37,7 +39,7 @@ void TestLevel::Update(float deltaTime)
 	Check_GameClear();
 }
 
-void TestLevel::Draw()
+void Level2::Draw()
 {
 	Super::Draw();
 

@@ -2,7 +2,9 @@
 
 #include "Level/MenuLevel.h"
 #include "Manager/Data_Manager.h"
-#include "Level/TestLevel.h"
+#include "Level/Level1.h"
+#include "Level/Level2.h"
+#include "Level/Level3.h"
 #include "Level/MainMenuLevel.h"
 #include "Level/ToolLevel.h"
 #include "Level/GameOverLevel.h"
@@ -73,7 +75,19 @@ void Game::Load_ToolLevel()
 void Game::Load_Level1()
 {
 	DM.Set_Mode(MODE::GAME_MODE);
-	ENGINE.ChangeLevel(new TestLevel());
+	ENGINE.ChangeLevel(new Level1());
+}
+
+void Game::Load_Level2()
+{
+	DM.Set_Mode(MODE::GAME_MODE);
+	ENGINE.ChangeLevel(new Level2());
+}
+
+void Game::Load_Level3()
+{
+	DM.Set_Mode(MODE::GAME_MODE);
+	ENGINE.ChangeLevel(new Level3());
 }
 
 void Game::Load_GameOverMenu()
@@ -85,5 +99,6 @@ void Game::Load_GameOverMenu()
 void Game::Load_ClearMenu()
 {
 	DM.Set_Mode(MODE::MENU_MODE);
+	DM.Set_Level((GAMELEVEL)(DM.Get_Level() + 1));
 	ENGINE.ChangeLevel(new GameClearLevel());
 }

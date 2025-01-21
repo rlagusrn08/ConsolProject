@@ -10,11 +10,7 @@ Target::Target(const Vector2& _position)
 
 void Target::Update(float delatTime)
 {
-	if (position == DM.Get_Player_Position() && DM.Get_Mode() == GAME_MODE)
-	{
-		DM.Increase_Score(1);
-		Destroy();
-	}
+	Super::Update(delatTime);
 }
 
 void Target::Draw()

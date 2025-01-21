@@ -21,7 +21,7 @@
     <ClCompile Include="Network\NetworkExample.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Level\TestLevel.cpp">
+    <ClCompile Include="Level\Level1.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Actor\Player.cpp">
@@ -66,6 +66,12 @@
     <ClCompile Include="Level\GameClearLevel.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Level\Level2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Level\Level3.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Network\NetworkExample.h">
@@ -80,7 +86,7 @@
     <ClInclude Include="Header\Define.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Level\TestLevel.h">
+    <ClInclude Include="Level\Level1.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Actor\Player.h">
@@ -123,6 +129,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Level\GameClearLevel.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Level2.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Level3.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

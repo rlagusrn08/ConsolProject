@@ -12,6 +12,8 @@ public:
 	void Load_MainMenu();
 	void Load_ToolLevel();
 	void Load_Level1();
+	void Load_Level2();
+	void Load_Level3();
 	void Load_GameOverMenu();
 	void Load_ClearMenu();
 

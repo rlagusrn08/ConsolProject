@@ -17,18 +17,28 @@ void Data_Manager::Draw()
 	if (currentMode == MODE::GAME_MODE)
 	{
 		Vector2 UIPosition = Vector2(0, ENGINE.ScreenSize().y - 1);
+		if (bReadyGame)
+		{
+			const char* str = "READY!! Press Any Button";
+			char* buffer = new char[255];
+			strcpy_s(buffer, strlen(str) + 1, str);
+			ENGINE.Draw(UIPosition, buffer);
+			delete[] buffer;
+		}
+		else
+		{
+			const char* first = "Score : ";
+			char* s = new char[255];
+			char* buffer = new char[255];
+			snprintf(s, sizeof(s), "%d", score);
 
-		const char* first = "Score : ";
-		char* s = new char[255];
-		char* buffer = new char[255];
-		snprintf(s, sizeof(s), "%d", score);
+			strcpy_s(buffer, strlen(first) + 1, first);
+			strcat_s(buffer, strlen(first) + strlen(s) + 1, s);
 
-		strcpy_s(buffer, strlen(first) + 1, first);
-		strcat_s(buffer, strlen(first) + strlen(s) + 1, s);
-
-		ENGINE.Draw(UIPosition, buffer);
-		delete[] buffer;
-		delete[] s;
+			ENGINE.Draw(UIPosition, buffer);
+			delete[] buffer;
+			delete[] s;
+		}
 	}
 	else if (currentMode == MODE::TOOL_MODE)
 	{
