@@ -4,6 +4,8 @@
 #include "RTTI.h"
 #include "Math/Vector2.h"
 
+class QT_Node;
+
 // 레벨의 기본 물체.
 class ENGINE_API Actor : public RTTI
 {
@@ -31,10 +33,12 @@ public:
 	inline void Destroy() { isExpired = true; }
 	virtual const char* Serialize();
 	virtual void Intersect(Actor* other);
+	QT_Node* Get_QT_Node();
 
 protected:
 	// 액터의 위치.
 	Vector2 position;
+	QT_Node* node = nullptr;
 
 	// ID(해시) / 이름 값.
 	// 활성화 상태인지를 나타내는 변수.

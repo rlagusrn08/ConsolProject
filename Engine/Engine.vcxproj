@@ -208,6 +208,9 @@ xcopy $(OutDir)\Engine.dll $(SolutionDir)Bin\$(Platform)\$(Configuration)\Client
     <ClInclude Include="Level\Level.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="PreCompiledHeader\PreCompiledHeader.h" />
+    <ClInclude Include="QuadTree\Bounds.h" />
+    <ClInclude Include="QuadTree\QT_Node.h" />
+    <ClInclude Include="QuadTree\QuadTree.h" />
     <ClInclude Include="Render\ScreenBuffer.h" />
     <ClInclude Include="RTTI.h" />
     <ClInclude Include="BehaviorTree\SequenceNode.h" />
@@ -228,6 +231,9 @@ xcopy $(OutDir)\Engine.dll $(SolutionDir)Bin\$(Platform)\$(Configuration)\Client
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="QuadTree\Bounds.cpp" />
+    <ClCompile Include="QuadTree\QT_node.cpp" />
+    <ClCompile Include="QuadTree\QuadTree.cpp" />
     <ClCompile Include="Render\ScreenBuffer.cpp" />
     <ClCompile Include="BehaviorTree\SequenceNode.cpp" />
   </ItemGroup>

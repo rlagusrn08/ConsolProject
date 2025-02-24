@@ -267,11 +267,6 @@ void Tile_Manager::Start_Astar(const Vector2& vStart, const Vector2& vGoal, list
 	if (Make_Route(m_iStartIndex, iGoalIndex))
 	{
 		Make_BestList(m_iStartIndex, iGoalIndex, OutputList);
-		//TODO : Delete This
-		for (auto iter : m_BestList)
-		{
-			iter->Set_DebugDraw();
-		}
 	}
 }
 

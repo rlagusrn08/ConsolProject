@@ -6,7 +6,13 @@
 #include "Actor/Item.h"
 
 #include "Manager/Data_Manager.h"
+#include "Tile/Tile_Manager.h"
 #include "Game/Game.h"
+
+GameLevel::~GameLevel()
+{
+	//delete m_pQuadTree;
+}
 
 void GameLevel::Load_Actor(const char* path)
 {
@@ -16,6 +22,8 @@ void GameLevel::Load_Actor(const char* path)
 
 	if (file)
 	{
+		//m_pQuadTree = new QuadTree(Bounds(0, 0, TM.Get_Tile_SizeX(), TM.Get_Tile_SizeY()));
+
 		Clear_Actor();
 
 		List<Actor*> Ghosts;
@@ -30,6 +38,8 @@ void GameLevel::Load_Actor(const char* path)
 
 			if (szType == '\0' || iX == -1 || iY == -1) break;
 			
+			Actor* pCurrentActor = nullptr;
+
 			switch (szType)
 			{
 			case 'P':
@@ -37,17 +47,26 @@ void GameLevel::Load_Actor(const char* path)
 				m_pPlayer = new Player(Vector2(iX, iY));
 				DM.Set_Player_Pointer(m_pPlayer);
 				actors.PushBack(m_pPlayer);
+				//m_pQuadTree->Insert(m_pPlayer->Get_QT_Node());
 				break;
 			}
 			case 'T':
-				actors.PushBack(new Target(Vector2(iX, iY)));
+				pCurrentActor = new Target(Vector2(iX, iY));
+				actors.PushBack(pCurrentActor);
 				break;
 			case 'I':
-				actors.PushBack(new Item(Vector2(iX, iY)));
+				pCurrentActor = new Item(Vector2(iX, iY));
+				actors.PushBack(pCurrentActor);
 				break;
 			case 'G':
-				Ghosts.PushBack(new Ghost(Vector2(iX, iY)));
+				pCurrentActor = new Ghost(Vector2(iX, iY));
+				Ghosts.PushBack(pCurrentActor);
 				break;
+			}
+
+			if (pCurrentActor != nullptr)
+			{
+				//m_pQuadTree->Insert(pCurrentActor->Get_QT_Node());
 			}
 		}
 		for (auto iter : Ghosts)
@@ -70,6 +89,14 @@ void GameLevel::Clear_Actor()
 
 void GameLevel::ProcessCollisionPlayerAndActor()
 {
+	//vector<Actor*> v = m_pQuadTree->Query(m_pPlayer->Get_QT_Node());
+	//for (auto iter : v)
+	//{
+	//	if (iter->As<Player>()) continue;
+	//
+	//	iter->As<DrawableActor>()->Set_Color(Color::Green);
+	//}
+
 	for (auto iter : actors)
 	{
 		if (iter->As<Player>()) continue;

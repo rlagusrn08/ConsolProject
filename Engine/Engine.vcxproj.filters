@@ -63,6 +63,15 @@
     <ClInclude Include="BehaviorTree\SequenceNode.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="QuadTree\Bounds.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTree\QT_Node.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTree\QuadTree.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -99,6 +108,15 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="BehaviorTree\SequenceNode.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTree\Bounds.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTree\QT_node.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTree\QuadTree.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

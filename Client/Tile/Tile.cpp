@@ -1,4 +1,5 @@
 #include "Tile.h"
+#include "Manager/Data_Manager.h"
 
 Tile::Tile(const Vector2& _position)
 {
@@ -8,8 +9,19 @@ Tile::Tile(const Vector2& _position)
 
 void Tile::Draw()
 {
-	if (m_tInfo.eOption == 1)
+	if (m_tInfo.eOption == TILE_WALL)
 		Engine::Get().Draw(position, "w", color);
+
+	if (m_tInfo.eOption == TILE_NORMAL && m_bDebugDraw)
+	{
+		m_bDebugDraw = false;
+		if(position != DM.Get_Player_Position()) 
+			Engine::Get().Draw(position, "X", Color::Green);
+	}
+	else if (m_tInfo.eOption == TILE_NORMAL && m_bDebugDraw)
+	{
+		Engine::Get().Draw(position, " ", color);
+	}
 }
 
 const char* Tile::Serialize()

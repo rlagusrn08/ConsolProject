@@ -1,8 +1,9 @@
 #include "Target.h"
 #include "Manager/Data_Manager.h"
+#include "QuadTree/QT_Node.h"
 
 Target::Target(const Vector2& _position)
-	: DrawableActor("*")
+	: DrawableActor("*", new QT_Node(Bounds(_position.x - 0.5f, _position.y - 0.5f), this))
 {
 	this->position = _position;
 	color = Color::White;

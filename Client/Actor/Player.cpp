@@ -6,9 +6,10 @@
 #include "Item.h"
 #include "Ghost.h"
 #include "Target.h"
+#include "QuadTree/QT_Node.h"
 
 Player::Player(const Vector2& _position)
-	: DrawableActor("C")
+	: DrawableActor("C", new QT_Node(Bounds(_position.x - 0.5f, _position.y - 0.5f), this))
 {
 	this->position = _position;
 	color = Color::Yellow;
@@ -82,7 +83,7 @@ void Player::Get_KeyDown()
 			m_fCurrentSpeed = m_fSpeedY;
 			Change_Image("D");
 		}
-	} 
+	}
 }
 
 void Player::Game_Move(float deltaTime)
@@ -126,7 +127,6 @@ void Player::Game_Move(float deltaTime)
 	{
 		DM.Set_Detect_Player_Move(false);
 	}
-
 }
 
 void Player::Tool_Move(float deltaTime)

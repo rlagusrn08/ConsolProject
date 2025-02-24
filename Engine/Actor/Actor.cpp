@@ -1,6 +1,6 @@
 #include "PreCompiledHeader.h"
 #include "Actor.h"
-
+#include "../QuadTree/QT_Node.h"
 #include "Core.h"
 
 Actor::Actor()
@@ -37,4 +37,9 @@ const char* Actor::Serialize()
 
 void Actor::Intersect(Actor* other)
 {
+}
+
+QT_Node* Actor::Get_QT_Node()
+{
+	return node;
 }

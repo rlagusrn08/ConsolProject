@@ -3,9 +3,10 @@
 #include "Manager/Data_Manager.h"
 #include "BehaviorTree/SequenceNode.h"
 #include "BehaviorTree/ActionNode.h"
+#include "QuadTree/QT_Node.h"
 
 Ghost::Ghost(const Vector2& _position)
-	: DrawableActor("G")
+	: DrawableActor("G", new QT_Node(Bounds(_position.x - 0.5f, _position.y - 0.5f), this))
 {
 	this->position = _position;
 	color = Color::Red;

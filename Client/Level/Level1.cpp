@@ -23,7 +23,6 @@ Level1::Level1()
 
 Level1::~Level1()
 {
-	
 }
 
 void Level1::Update(float deltaTime)

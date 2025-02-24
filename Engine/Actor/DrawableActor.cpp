@@ -2,9 +2,10 @@
 #include "DrawableActor.h"
 #include "Engine/Engine.h"
 
-DrawableActor::DrawableActor(const char* image)
+DrawableActor::DrawableActor(const char* image, QT_Node* _node)
 	: Actor()/*, image(image)*/
 {
+	node = _node;
 	// 전달 받은 문자열 복사.
 	auto length = strlen(image) + 1;
 	this->image = new char[length];
@@ -16,6 +17,7 @@ DrawableActor::DrawableActor(const char* image)
 
 DrawableActor::~DrawableActor()
 {
+	delete node;
 	delete[] image;
 }
 

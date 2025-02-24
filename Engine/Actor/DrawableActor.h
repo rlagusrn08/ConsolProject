@@ -8,7 +8,7 @@ class ENGINE_API DrawableActor : public Actor
 	RTTI_DECLARATIONS(DrawableActor, Actor)
 
 public:
-	DrawableActor(const char* image = " ");
+	DrawableActor(const char* image = " ", QT_Node* _node = nullptr);
 	//virtual ~DrawableActor() = default;
 	virtual ~DrawableActor();
 
@@ -16,14 +16,17 @@ public:
 	virtual void SetPosition(const Vector2& newPosition) override;
 
 	void Change_Image(const char* _image = " ");
+	void Set_Color(Color _color) { color = _color; }
 
 	// 충돌 확인 함수.
 	bool Intersect(const DrawableActor& other);
+
 
 	// Getter.
 	inline int Width() const { return width; }
 
 protected:
+
 
 	// 화면에 그릴 문자 값.
 	char* image;

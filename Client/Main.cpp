@@ -1,5 +1,9 @@
 #include <iostream>
 
+#define _CRTDBG_MAP_ALLOC
+#include <cstdlib>
+#include <crtdbg.h>
+
 #include "Engine/Engine.h"
 #include "Manager/Data_Manager.h"
 #include "Tile/Tile_Manager.h"
