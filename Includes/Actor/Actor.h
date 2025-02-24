@@ -32,6 +32,10 @@ public:
 	virtual const char* Serialize();
 	virtual void Intersect(Actor* other);
 
+public:
+	float Get_Left() { return position.x - 0.5f; }
+	float Get_Top() { return position.y - 0.5f; }
+
 protected:
 	// 액터의 위치.
 	Vector2 position;

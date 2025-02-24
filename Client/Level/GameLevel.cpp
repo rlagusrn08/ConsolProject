@@ -4,9 +4,14 @@
 #include "Actor/Target.h"
 #include "Actor/Ghost.h"
 #include "Actor/Item.h"
-
+#include "Tile/Tile_Manager.h"
 #include "Manager/Data_Manager.h"
 #include "Game/Game.h"
+
+GameLevel::~GameLevel()
+{
+	SafeDelete(m_pQuadTree);
+}
 
 void GameLevel::Load_Actor(const char* path)
 {
@@ -16,6 +21,7 @@ void GameLevel::Load_Actor(const char* path)
 
 	if (file)
 	{
+		m_pQuadTree = new QuadTree(Bounds(0.f, 0.f, TM.Get_Tile_SizeX(), TM.Get_Tile_SizeY()));
 		Clear_Actor();
 
 		List<Actor*> Ghosts;
@@ -56,8 +62,13 @@ void GameLevel::Load_Actor(const char* path)
 		}
 
 		fclose(file);
-	}
 
+		// TODO : Delete
+		for (Actor* iter : actors)
+		{
+			m_pQuadTree->Insert(new QT_Node(Bounds(iter->Get_Left(), iter->Get_Top()), iter));
+		}
+	}
 }
 
 void GameLevel::Clear_Actor()
@@ -70,14 +81,18 @@ void GameLevel::Clear_Actor()
 
 void GameLevel::ProcessCollisionPlayerAndActor()
 {
+
+
 	for (auto iter : actors)
 	{
 		if (iter->As<Player>()) continue;
 
-		if (iter->Position() == DM.Get_Player_Position())
-		{
-			m_pPlayer->Intersect(iter);
-		}
+		//if (iter->Position() == DM.Get_Player_Position())
+		//{
+		//	m_pPlayer->Intersect(iter);
+		//}
+
+
 	}
 }
 

@@ -83,10 +83,14 @@ void QT_Node::Clear()
 {
 	if (IsDivided())
 	{
-		topLeft->Clear();
-		topRight->Clear();
-		bottomLeft->Clear();
-		bottomRight->Clear();
+		if(topLeft != nullptr)
+			topLeft->Clear();
+		if(topRight != nullptr)
+			topRight->Clear();
+		if(bottomLeft != nullptr)
+			bottomLeft->Clear();
+		if (bottomRight != nullptr)
+			bottomRight->Clear();
 
 		ClearChildren();
 	}
@@ -183,7 +187,7 @@ bool QT_Node::Subdivide()
 
 bool QT_Node::IsDivided()
 {
-	return topLeft != nullptr || topRight != nullptr || bottomLeft != nullptr || bottomRight != nullptr;
+	return topLeft != nullptr;
 }
 
 void QT_Node::ClearChildren()

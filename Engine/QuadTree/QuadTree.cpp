@@ -35,3 +35,8 @@ std::vector<Actor*> QuadTree::Query(QT_Node* queryNode)
     // 검사한 결과 최종 반환.
     return actors;
 }
+
+void QuadTree::Clear()
+{
+    root->Clear();
+}
