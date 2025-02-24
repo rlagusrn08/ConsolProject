@@ -53,7 +53,7 @@ void QT_Node::Query(const Bounds& queryBounds, std::vector<QT_Node*>& possibleNo
 {
 	possibleNodes.push_back(this);
 
-	if (IsDivided())
+	if (isDivided)
 	{
 		vector<NodeIndex> quads = GetQuads(queryBounds);
 
@@ -81,7 +81,7 @@ void QT_Node::Query(const Bounds& queryBounds, std::vector<QT_Node*>& possibleNo
 
 void QT_Node::Clear()
 {
-	if (IsDivided())
+	if (isDivided)
 	{
 		if(topLeft != nullptr)
 			topLeft->Clear();
@@ -166,8 +166,9 @@ bool QT_Node::Subdivide()
 	}
 
 	// 아직 분할 안됐으면, 분할 진행.
-	if (!IsDivided())
+	if (!isDivided)
 	{
+		isDivided = true;
 		// 영역을 나누기 위한 값 계산.
 		float x = bounds.X();
 		float y = bounds.Y();
@@ -192,13 +193,17 @@ bool QT_Node::IsDivided()
 
 void QT_Node::ClearChildren()
 {
-	//if (IsDivided())
-	//{
-	//	SafeDelete(topLeft);
-	//	SafeDelete(topRight);
-	//	SafeDelete(bottomLeft);
-	//	SafeDelete(bottomRight);
-	//}
+	if (IsDivided())
+	{
+		SafeDelete(topLeft);
+		topLeft = nullptr;
+		SafeDelete(topRight);
+		topRight = nullptr;
+		SafeDelete(bottomLeft);
+		bottomLeft = nullptr;
+		SafeDelete(bottomRight);
+		bottomRight = nullptr;
+	}
 }
 
 

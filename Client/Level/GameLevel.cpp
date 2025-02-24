@@ -10,6 +10,10 @@
 
 GameLevel::~GameLevel()
 {
+	for (QT_Node* iter : vNodes)
+	{
+		SafeDelete(iter);
+	}
 	SafeDelete(m_pQuadTree);
 }
 
@@ -66,7 +70,9 @@ void GameLevel::Load_Actor(const char* path)
 		// TODO : Delete
 		for (Actor* iter : actors)
 		{
-			m_pQuadTree->Insert(new QT_Node(Bounds(iter->Get_Left(), iter->Get_Top()), iter));
+			QT_Node* temp = new QT_Node(Bounds(iter->Get_Left(), iter->Get_Top()), iter);
+			vNodes.push_back(temp);
+			m_pQuadTree->Insert(temp);
 		}
 	}
 }
@@ -81,8 +87,6 @@ void GameLevel::Clear_Actor()
 
 void GameLevel::ProcessCollisionPlayerAndActor()
 {
-
-
 	for (auto iter : actors)
 	{
 		if (iter->As<Player>()) continue;
@@ -91,8 +95,6 @@ void GameLevel::ProcessCollisionPlayerAndActor()
 		//{
 		//	m_pPlayer->Intersect(iter);
 		//}
-
-
 	}
 }
 

@@ -53,6 +53,7 @@ private:
 	Bounds bounds;
 	vector<Actor*> points;
 
+	bool isDivided = false;
 	QT_Node* topLeft = nullptr;
 	QT_Node* topRight = nullptr;
 	QT_Node* bottomLeft = nullptr;
