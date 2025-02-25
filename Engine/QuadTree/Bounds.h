@@ -5,7 +5,7 @@
 class ENGINE_API Bounds
 {
 public:
-	Bounds(float x, float y, float width = 1.0f, float height = 1.0f)
+	Bounds(float x, float y, float width = 0.0f, float height = 0.0f)
 		: x(x), y(y), width(width), height(height)
 	{
 	}

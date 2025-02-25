@@ -81,6 +81,7 @@ void QT_Node::Query(const Bounds& queryBounds, std::vector<QT_Node*>& possibleNo
 
 void QT_Node::Clear()
 {
+	points.clear();
 	if (isDivided)
 	{
 		if(topLeft != nullptr)
@@ -94,6 +95,7 @@ void QT_Node::Clear()
 
 		ClearChildren();
 	}
+	isDivided = false;
 }
 
 NodeIndex QT_Node::TestRegion(const Bounds& other)
@@ -193,9 +195,9 @@ bool QT_Node::IsDivided()
 
 void QT_Node::ClearChildren()
 {
-	if (IsDivided())
+	if (isDivided)
 	{
-		SafeDelete(topLeft);
+		SafeDelete<QT_Node>(topLeft);
 		topLeft = nullptr;
 		SafeDelete(topRight);
 		topRight = nullptr;

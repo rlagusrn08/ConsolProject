@@ -18,6 +18,7 @@ protected:
 
 private:
 	QuadTree* m_pQuadTree = nullptr;
-	vector<QT_Node*> vNodes;
+	vector<QT_Node*> m_vNodes;
 	Player* m_pPlayer = nullptr;
+	QT_Node* m_pPlayerNode = nullptr;
 };

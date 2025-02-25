@@ -10,10 +10,15 @@
 
 GameLevel::~GameLevel()
 {
-	for (QT_Node* iter : vNodes)
+	for (QT_Node* iter : m_vNodes)
 	{
 		SafeDelete(iter);
 	}
+	m_vNodes.clear();
+
+	delete m_pPlayerNode;
+	m_pPlayerNode = nullptr;
+
 	SafeDelete(m_pQuadTree);
 }
 
@@ -67,13 +72,7 @@ void GameLevel::Load_Actor(const char* path)
 
 		fclose(file);
 
-		// TODO : Delete
-		for (Actor* iter : actors)
-		{
-			QT_Node* temp = new QT_Node(Bounds(iter->Get_Left(), iter->Get_Top()), iter);
-			vNodes.push_back(temp);
-			m_pQuadTree->Insert(temp);
-		}
+		
 	}
 }
 
@@ -87,15 +86,46 @@ void GameLevel::Clear_Actor()
 
 void GameLevel::ProcessCollisionPlayerAndActor()
 {
-	for (auto iter : actors)
+	m_pPlayerNode = new QT_Node(Bounds(m_pPlayer->Get_Left(), m_pPlayer->Get_Top()), m_pPlayer);
+	m_pQuadTree->Insert(m_pPlayerNode);
+
+	for (Actor* iter : actors)
 	{
 		if (iter->As<Player>()) continue;
 
-		//if (iter->Position() == DM.Get_Player_Position())
-		//{
-		//	m_pPlayer->Intersect(iter);
-		//}
+#ifdef _DEBUG
+		if (!iter->As<Ghost>()) iter->As<DrawableActor>()->SetColor(Color::White);
+#endif
+		QT_Node* temp = new QT_Node(Bounds(iter->Get_Left(), iter->Get_Top()), iter);
+		m_vNodes.push_back(temp);
+		m_pQuadTree->Insert(temp);
 	}
+
+	vector<Actor*> possibleActors = m_pQuadTree->Query(m_pPlayerNode);
+	for (auto iter : possibleActors)
+	{
+		if (iter->As<Player>()) continue;
+
+#ifdef _DEBUG
+		if (!iter->As<Ghost>()) iter->As<DrawableActor>()->SetColor(Color::Green);
+#endif
+
+		if (iter->Position() == DM.Get_Player_Position())
+		{
+			m_pPlayer->Intersect(iter);
+		}
+	}
+
+	delete m_pPlayerNode;
+	m_pPlayerNode = nullptr;
+
+	for (QT_Node* iter : m_vNodes)
+	{
+		delete iter;
+		iter = nullptr;
+	}
+	m_vNodes.clear();
+	m_pQuadTree->Clear();
 }
 
 void GameLevel::Check_GameClear()
