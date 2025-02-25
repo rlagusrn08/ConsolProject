@@ -18,25 +18,25 @@ enum class NodeIndex
 	END
 };
 
-class ENGINE_API QT_Node
+class ENGINE_API QTNode
 {
 public:
-	QT_Node(const Bounds& bounds, Actor* owner, int depth = 0);
-	~QT_Node();
+	QTNode(const Bounds& bounds, Actor* owner, int depth = 0);
+	~QTNode();
 
 public:
-	void Insert(QT_Node* node);
-	void Query(const Bounds& queryBounds, std::vector<QT_Node*>& possibleNodes);
+	void Insert(QTNode* node);
+	void Query(const Bounds& queryBounds, std::vector<QTNode*>& possibleNodes);
 	void Clear();
 
 public:
 	Bounds Get_Bounds() { return bounds; }
 	const vector<Actor*>& Points() const { return points; }
 
-	QT_Node* Get_TopLeft() const { return topLeft; }
-	QT_Node* Get_TopRight() const { return topRight; }
-	QT_Node* Get_BottomLeft() const { return bottomLeft; }
-	QT_Node* Get_BottomRight() const { return bottomRight; }
+	QTNode* Get_TopLeft() const { return topLeft; }
+	QTNode* Get_TopRight() const { return topRight; }
+	QTNode* Get_BottomLeft() const { return bottomLeft; }
+	QTNode* Get_BottomRight() const { return bottomRight; }
 	Actor* Get_Owner() { return m_pOwner; }
 private:
 	NodeIndex TestRegion(const Bounds& _bounds);
@@ -54,8 +54,8 @@ private:
 	vector<Actor*> points;
 
 	bool isDivided = false;
-	QT_Node* topLeft = nullptr;
-	QT_Node* topRight = nullptr;
-	QT_Node* bottomLeft = nullptr;
-	QT_Node* bottomRight = nullptr;
+	QTNode* topLeft = nullptr;
+	QTNode* topRight = nullptr;
+	QTNode* bottomLeft = nullptr;
+	QTNode* bottomRight = nullptr;
 };

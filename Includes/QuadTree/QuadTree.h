@@ -8,13 +8,13 @@ public:
 	QuadTree(const Bounds& bounds);
 	~QuadTree();
 
-	void Insert(QT_Node* node);
-	vector<Actor*> Query(QT_Node* queryNode);
+	void Insert(QTNode* node);
+	vector<Actor*> Query(QTNode* queryNode);
 	void Clear();
 
 public:
 	static const int maxDepth = 2;
 
 private:
-	QT_Node* root = nullptr;
+	QTNode* root = nullptr;
 };

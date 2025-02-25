@@ -2,18 +2,18 @@
 #include "QT_NODE.h"
 #include "QuadTree.h"
 
-QT_Node::QT_Node(const Bounds& bounds, Actor* owner, int depth)
+QTNode::QTNode(const Bounds& bounds, Actor* owner, int depth)
 	: bounds(bounds), depth(depth)
 {
 	m_pOwner = owner;
 }
 
-QT_Node::~QT_Node()
+QTNode::~QTNode()
 {
 	Clear();
 }
 
-void QT_Node::Insert(QT_Node* node)
+void QTNode::Insert(QTNode* node)
 {
 	NodeIndex result = TestRegion(node->Get_Bounds());
 
@@ -49,7 +49,7 @@ void QT_Node::Insert(QT_Node* node)
 	}
 }
 
-void QT_Node::Query(const Bounds& queryBounds, std::vector<QT_Node*>& possibleNodes)
+void QTNode::Query(const Bounds& queryBounds, std::vector<QTNode*>& possibleNodes)
 {
 	possibleNodes.push_back(this);
 
@@ -79,7 +79,7 @@ void QT_Node::Query(const Bounds& queryBounds, std::vector<QT_Node*>& possibleNo
 	}
 }
 
-void QT_Node::Clear()
+void QTNode::Clear()
 {
 	points.clear();
 	if (isDivided)
@@ -98,7 +98,7 @@ void QT_Node::Clear()
 	isDivided = false;
 }
 
-NodeIndex QT_Node::TestRegion(const Bounds& other)
+NodeIndex QTNode::TestRegion(const Bounds& other)
 {
 	vector<NodeIndex> quads = GetQuads(other);
 
@@ -115,7 +115,7 @@ NodeIndex QT_Node::TestRegion(const Bounds& other)
 	return NodeIndex::STRADDLING;
 }
 
-vector<NodeIndex> QT_Node::GetQuads(const Bounds& other)
+vector<NodeIndex> QTNode::GetQuads(const Bounds& other)
 {
 	std::vector<NodeIndex> quads;
 
@@ -159,7 +159,7 @@ vector<NodeIndex> QT_Node::GetQuads(const Bounds& other)
 	return quads;
 }
 
-bool QT_Node::Subdivide()
+bool QTNode::Subdivide()
 {
 	// 최대 깊이에 도달했으면 더이상 안나눔.
 	if (depth == QuadTree::maxDepth)
@@ -178,33 +178,29 @@ bool QT_Node::Subdivide()
 		float halfHeight = bounds.Height() / 2;
 
 		// 각 4분면의 자식 객체 생성.
-		topLeft = new QT_Node(Bounds(x, y, halfWidth, halfHeight), nullptr, depth + 1);
-		topRight = new QT_Node(Bounds(x + halfWidth, y, halfWidth, halfHeight), nullptr, depth + 1);
-		bottomLeft = new QT_Node(Bounds(x, y + halfHeight, halfWidth, halfHeight), nullptr, depth + 1);
-		bottomRight = new QT_Node(Bounds(x + halfWidth, y + halfHeight, halfWidth, halfHeight), nullptr, depth + 1);
+		topLeft = new QTNode(Bounds(x, y, halfWidth, halfHeight), nullptr, depth + 1);
+		topRight = new QTNode(Bounds(x + halfWidth, y, halfWidth, halfHeight), nullptr, depth + 1);
+		bottomLeft = new QTNode(Bounds(x, y + halfHeight, halfWidth, halfHeight), nullptr, depth + 1);
+		bottomRight = new QTNode(Bounds(x + halfWidth, y + halfHeight, halfWidth, halfHeight), nullptr, depth + 1);
 	}
 
 	return true;
 }
 
 
-bool QT_Node::IsDivided()
+bool QTNode::IsDivided()
 {
 	return topLeft != nullptr;
 }
 
-void QT_Node::ClearChildren()
+void QTNode::ClearChildren()
 {
 	if (isDivided)
 	{
-		SafeDelete<QT_Node>(topLeft);
-		topLeft = nullptr;
+		SafeDelete(topLeft);
 		SafeDelete(topRight);
-		topRight = nullptr;
 		SafeDelete(bottomLeft);
-		bottomLeft = nullptr;
 		SafeDelete(bottomRight);
-		bottomRight = nullptr;
 	}
 }
 

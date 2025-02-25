@@ -10,7 +10,7 @@
 
 GameLevel::~GameLevel()
 {
-	for (QT_Node* iter : m_vNodes)
+	for (QTNode* iter : m_vNodes)
 	{
 		SafeDelete(iter);
 	}
@@ -86,7 +86,7 @@ void GameLevel::Clear_Actor()
 
 void GameLevel::ProcessCollisionPlayerAndActor()
 {
-	m_pPlayerNode = new QT_Node(Bounds(m_pPlayer->Get_Left(), m_pPlayer->Get_Top()), m_pPlayer);
+	m_pPlayerNode = new QTNode(Bounds(m_pPlayer->Get_Left(), m_pPlayer->Get_Top()), m_pPlayer);
 	m_pQuadTree->Insert(m_pPlayerNode);
 
 	for (Actor* iter : actors)
@@ -96,7 +96,7 @@ void GameLevel::ProcessCollisionPlayerAndActor()
 #ifdef _DEBUG
 		if (!iter->As<Ghost>()) iter->As<DrawableActor>()->SetColor(Color::White);
 #endif
-		QT_Node* temp = new QT_Node(Bounds(iter->Get_Left(), iter->Get_Top()), iter);
+		QTNode* temp = new QTNode(Bounds(iter->Get_Left(), iter->Get_Top()), iter);
 		m_vNodes.push_back(temp);
 		m_pQuadTree->Insert(temp);
 	}
@@ -119,7 +119,7 @@ void GameLevel::ProcessCollisionPlayerAndActor()
 	delete m_pPlayerNode;
 	m_pPlayerNode = nullptr;
 
-	for (QT_Node* iter : m_vNodes)
+	for (QTNode* iter : m_vNodes)
 	{
 		delete iter;
 		iter = nullptr;

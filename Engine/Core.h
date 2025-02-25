@@ -37,7 +37,7 @@ enum class CursorType
 
 // 메모리 삭제 함수.
 template<typename T>
-void SafeDelete(T* pointer)
+void SafeDelete(T*& pointer)
 {
 	if (pointer != nullptr)
 	{
