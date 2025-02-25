@@ -10,7 +10,7 @@ Ghost::Ghost(const Vector2& _position)
 	this->position = _position;
 	color = Color::Red;
 
-	m_tAttackDurationTimeInfo.DurationTime = 15.f;
+	m_tAttackDurationTimeInfo.DurationTime = 10.f;
 	m_tAttackCoolTimeInfo.CoolTime = 3.f;
 
 	if (DM.Get_Mode() == GAME_MODE)
@@ -48,9 +48,8 @@ void Ghost::Make_Route()
 {
 	if (DM.Get_Mode() != GAME_MODE) return;
 
-	
-	TM.Start_Astar(position, DM.Get_Player_Position(), m_BestRoute);
-	
+	if(DM.Get_Detect_Player_Move())
+		TM.Start_Astar(position, DM.Get_Player_Position(), m_BestRoute);
 }
 
 Node::STATE Ghost::Check_Player_Item_Active(float deltaTime)
